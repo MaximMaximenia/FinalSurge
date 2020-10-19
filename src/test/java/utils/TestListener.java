@@ -1,6 +1,5 @@
 package utils;
 
-import io.qameta.allure.Attachment;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -36,7 +35,7 @@ public class TestListener implements ITestListener {
         takeScreenshot(iTestResult);
     }
 
-   @Attachment(value = "Page screenshot", type = "image/png")
+   // @Attachment(value = "Page screenshot", type = "image/png")
     public byte[] takeScreenshot(ITestResult iTestResult) {
         ITestContext context = iTestResult.getTestContext();
 
