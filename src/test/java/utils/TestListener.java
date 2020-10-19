@@ -1,41 +1,43 @@
 package utils;
 
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebDriver;
+
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
 import java.util.concurrent.TimeUnit;
 
+@Log4j2
 public class TestListener implements ITestListener {
-    WebDriver driver;
+
 
     public void onTestStart(ITestResult iTestResult) {
-        System.out.println(("======================================== STARTING TEST " + iTestResult.getName() + " ========================================"));
+        log.info(("======================================== STARTING TEST " + iTestResult.getName() + " ========================================"));
 
     }
 
     public void onTestSuccess(ITestResult iTestResult) {
-        System.out.printf("======================================== FINISHED TEST %s Duration: %ss ========================================%n", iTestResult.getName(),
-                getExecutionTime(iTestResult));
+        log.info(String.format("======================================== FINISHED TEST %s Duration: %ss ========================================%n", iTestResult.getName(),
+                getExecutionTime(iTestResult)));
 
     }
 
     public void onTestFailure(ITestResult iTestResult) {
-        System.out.printf("======================================== FAILED TEST %s Duration: %ss ========================================%n", iTestResult.getName(),
-                getExecutionTime(iTestResult));
+        log.info(String.format("======================================== FAILED TEST %s Duration: %ss ========================================%n", iTestResult.getName(),
+                getExecutionTime(iTestResult)));
         takeScreenshot(iTestResult);
     }
 
     public void onTestSkipped(ITestResult iTestResult) {
-        System.out.printf("======================================== SKIPPING TEST %s ========================================%n", iTestResult.getName());
+        log.info(String.format("======================================== SKIPPING TEST %s ========================================%n", iTestResult.getName()));
         takeScreenshot(iTestResult);
     }
 
-   // @Attachment(value = "Page screenshot", type = "image/png")
+    // @Attachment(value = "Page screenshot", type = "image/png")
     public byte[] takeScreenshot(ITestResult iTestResult) {
         ITestContext context = iTestResult.getTestContext();
 
