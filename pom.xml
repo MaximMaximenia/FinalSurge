@@ -11,6 +11,7 @@
         <aspectj.version>1.8.10</aspectj.version>
         <maven-surfire-plugin.version>3.0.0-M3</maven-surfire-plugin.version>
         <testng.version>7.0.0</testng.version>
+        <selenium.version>3.141.59</selenium.version>
     </properties>
 
     <build>
@@ -44,6 +45,12 @@
     </build>
     <dependencies>
         <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.8</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
             <groupId>org.testng</groupId>
             <artifactId>testng</artifactId>
             <version>${testng.version}</version>
@@ -53,7 +60,7 @@
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
-            <version>3.141.59</version>
+            <version>${selenium.version}</version>
         </dependency>
 
     </dependencies>
