@@ -1,16 +1,15 @@
 package tests;
 
 import org.testng.annotations.Test;
-import utils.Retry;
 
 public class LoginTest extends BaseTest {
 
-    @Test(retryAnalyzer = Retry.class)
+    @Test
     public void login() {
 
-        loginPage
-                .fillLoginFields("masya@mail.ru", "1234321MAks__", false)
-                .clickLogin()
+        loginSteps
+                .openPage()
+                .login("masya@mail.ru", "1234321MAks__", false)
                 .validateLogin();
 
     }
@@ -18,26 +17,26 @@ public class LoginTest extends BaseTest {
     @Test
     public void checkEmptyEmailMessage() {
 
-        loginPage
-                .fillLoginFields("", "1234321MAks__", false)
-                .clickLogin()
-                .checkThatMessageAppear("Please enter your e-mail address.");
+        loginSteps
+                .login("", "1234321MAks__", false)
+                .checkThatMessageUnderInputAppear();
     }
 
     @Test
     public void checkEmptyPasswordMessage() {
 
-        loginPage
-                .fillLoginFields("masya@mail.ru", "", false)
-                .clickLogin()
-                .checkThatMessageAppear("Please enter a password.");
+        loginSteps
+                .login("masya@mail.ru", "", false)
+                .checkThatMessageUnderInputAppear();
+
     }
+
     @Test
     public void nonExistentUserError() {
 
-        loginPage
-                .fillLoginFields("masya@mail.ru", "123123123", false)
-                .clickLogin()
+        loginSteps
+                .login("masya@mail.rus", "1234321MAks__", false)
                 .errorMessageShouldBe("Invalid login credentials. Please try again.");
+
     }
 }
