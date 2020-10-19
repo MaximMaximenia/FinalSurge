@@ -3,6 +3,7 @@ package tests;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
@@ -22,7 +23,7 @@ public class BaseTest {
     RegisterPage registerPage;
 
     @BeforeMethod
-    public void setUp() {
+    public void setUp(ITestContext context) {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().window().maximize();
@@ -30,7 +31,9 @@ public class BaseTest {
         registerPage = new RegisterPage(driver);
         mainPage = new MainPage(driver);
         loginPage = new LoginPage(driver);
+        context.setAttribute("driver", driver);
         loginPage.openPage();
+
     }
 
     @AfterMethod(alwaysRun = true)
