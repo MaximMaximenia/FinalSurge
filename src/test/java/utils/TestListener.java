@@ -1,7 +1,5 @@
 package utils;
 
-import io.qameta.allure.Attachment;
-import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
@@ -35,6 +33,7 @@ public class TestListener implements ITestListener {
         log.info(String.format("======================================== SKIPPING TEST %s ========================================%n", iTestResult.getName()));
         takeScreenshot(iTestResult);
     }
+
 
     @Attachment(value = "Page screenshot", type = "image/png")
     public byte[] takeScreenshot(ITestResult iTestResult) {
