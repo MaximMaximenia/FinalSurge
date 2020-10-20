@@ -7,6 +7,8 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import steps.LoginSteps;
+import steps.RegistrationSteps;
+import steps.WorkoutSteps;
 import utils.CapabilitiesGenerator;
 import utils.TestListener;
 
@@ -16,15 +18,19 @@ import java.util.concurrent.TimeUnit;
 public class BaseTest {
     WebDriver driver;
     LoginSteps loginSteps;
+    WorkoutSteps workoutSteps;
+    RegistrationSteps registrationSteps;
 
     @BeforeMethod
     public void setUp(ITestContext context) {
         System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(35, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
 
         loginSteps = new LoginSteps(driver);
+        workoutSteps = new WorkoutSteps(driver);
+        registrationSteps = new RegistrationSteps(driver);
         context.setAttribute("driver", driver);
         loginSteps.openPage();
 
@@ -32,6 +38,6 @@ public class BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void closeBrowser() {
-        driver.quit();
+
     }
 }

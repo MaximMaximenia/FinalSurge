@@ -27,6 +27,11 @@ public class LoginSteps extends BaseSteps {
         return this;
     }
 
+    public RegistrationSteps toRegistration() {
+        loginPage.toRegisterPage();
+        return new RegistrationSteps(driver);
+    }
+
     public void errorMessageShouldBe(String error) {
         assertEquals(loginPage.getErrorMessage(), error);
     }
