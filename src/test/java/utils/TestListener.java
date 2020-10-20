@@ -26,7 +26,7 @@ public class TestListener implements ITestListener {
     }
 
     public void onTestFailure(ITestResult iTestResult) {
-        log.info(String.format("======================================== FAILED TEST %s Duration: %ss ========================================%n", iTestResult.getName(),
+        log.info(String.format("======================================= FAILED TEST %s Duration: %ss ========================================%n", iTestResult.getName(),
                 getExecutionTime(iTestResult)));
         takeScreenshot(iTestResult);
     }
