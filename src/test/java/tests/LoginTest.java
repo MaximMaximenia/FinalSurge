@@ -5,7 +5,7 @@ import utils.Retry;
 
 public class LoginTest extends BaseTest {
 
-    @Test//(retryAnalyzer = Retry.class)
+    @Test(retryAnalyzer = Retry.class)
     public void login() {
 
         loginSteps
@@ -15,7 +15,7 @@ public class LoginTest extends BaseTest {
 
     }
 
-    @Test//(retryAnalyzer = Retry.class)
+    @Test(retryAnalyzer = Retry.class)
     public void checkEmptyEmailMessage() {
 
         loginSteps
@@ -23,7 +23,7 @@ public class LoginTest extends BaseTest {
                 .checkThatMessageUnderInputAppear();
     }
 
-    @Test//(retryAnalyzer = Retry.class)
+    @Test(retryAnalyzer = Retry.class)
     public void checkEmptyPasswordMessage() {
 
         loginSteps
@@ -32,7 +32,7 @@ public class LoginTest extends BaseTest {
 
     }
 
-    @Test//(retryAnalyzer = Retry.class)
+    @Test(retryAnalyzer = Retry.class)
     public void nonExistentUserError() {
 
         loginSteps
