@@ -15,7 +15,7 @@ import java.util.concurrent.TimeUnit;
 @Listeners(TestListener.class)
 public class BaseTest {
     WebDriver driver;
-   LoginSteps loginSteps;
+    LoginSteps loginSteps;
 
     @BeforeMethod
     public void setUp(ITestContext context) {

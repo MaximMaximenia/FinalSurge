@@ -33,7 +33,7 @@ public class LoginPage extends BasePage {
     }
 
     public void checkThatMessageAppear() {
-      driver.findElement(EMPTY_FIELD_MESSAGE).isDisplayed();
+        driver.findElement(EMPTY_FIELD_MESSAGE).isDisplayed();
     }
 
     public RegisterPage toRegisterPage() {
@@ -58,7 +58,7 @@ public class LoginPage extends BasePage {
     }
 
     public String validateLogin() {
-        return  driver.getCurrentUrl();
+        return driver.getCurrentUrl();
     }
 
 

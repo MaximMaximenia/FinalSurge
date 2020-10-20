@@ -25,7 +25,6 @@ public class RegisterPage extends BasePage {
     }
 
 
-
     public void fillAccount(Account account) {
 
         Select select = new Select(driver.findElement(SELECT_TIME_ZONE));
@@ -43,7 +42,7 @@ public class RegisterPage extends BasePage {
     }
 
     public void passwordComplexityShouldBe(String expectedComplexity) {
-        assertEquals(driver.findElement(PASSWORD_COMPLEXITY).getText(),expectedComplexity);
+        assertEquals(driver.findElement(PASSWORD_COMPLEXITY).getText(), expectedComplexity);
     }
 
     public void checkThatErrorAppearedUnderLocator(String locator) {
