@@ -9,7 +9,7 @@
     <version>1.0-SNAPSHOT</version>
     <properties>
         <aspectj.version>1.9.1</aspectj.version>
-        <maven-surfire-plugin.version>3.0.0-M3</maven-surfire-plugin.version>
+        <maven-surfire-plugin.version>2.22.0</maven-surfire-plugin.version>
         <testng.version>7.0.0</testng.version>
         <selenium.version>3.141.59</selenium.version>
         <allure-maven.version>2.10.0</allure-maven.version>
