@@ -11,7 +11,7 @@ public class LoginSteps extends BaseSteps {
     }
 
     public void validateLogin() {
-        assertEquals(loginPage.getCurrentUrl(),BASE_URL+"Calendar.cshtml");
+        assertEquals(loginPage.getCurrentUrl(), BASE_URL + "Calendar.cshtml");
     }
 
 
@@ -25,6 +25,11 @@ public class LoginSteps extends BaseSteps {
     public LoginSteps openPage() {
         loginPage.openPage();
         return this;
+    }
+
+    public RegistrationSteps toRegistration() {
+        loginPage.toRegisterPage();
+        return new RegistrationSteps(driver);
     }
 
     public void errorMessageShouldBe(String error) {

@@ -1,4 +1,3 @@
-
 Configuration:
   status: INFO
   Properties:
@@ -13,8 +12,7 @@ Configuration:
         Pattern: ${DefaultPattern}
   Loggers:
     logger:
-      -
-        name: consoleLogger
+      - name: consoleLogger
         level: INFO
         additivity: true
         AppenderRef:

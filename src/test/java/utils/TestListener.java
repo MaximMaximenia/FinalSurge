@@ -43,9 +43,13 @@ public class TestListener implements ITestListener {
         ITestContext context = iTestResult.getTestContext();
 
         try {
-            return ((TakesScreenshot) context.getAttribute("driver")).getScreenshotAs(OutputType.BYTES);
+            if(context.getAttribute("driver") != null) {
+                return ((TakesScreenshot) context.getAttribute("driver")).getScreenshotAs(OutputType.BYTES);
+            } else {
+                return new byte[]{};
+            }
         } catch (NoSuchSessionException | IllegalStateException ex) {
-            return null;
+            return new byte[]{};
         }
     }
 

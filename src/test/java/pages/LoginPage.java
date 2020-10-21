@@ -10,7 +10,7 @@ public class LoginPage extends BasePage {
     public static final By PASSWORD_INPUT = By.cssSelector("#login_password");
     public static final By CHECKBOX_REMEMBER_ME = By.cssSelector("#login_remember");
     public static final By LOGIN_BUTTON = By.cssSelector(".btn");
-    public static final By REGISTER_PAGE = By.xpath("//a[@href = 'register.cshtml?page_redirect=%2fUserProfile.cshtml']");
+    public static final By REGISTER_PAGE = By.xpath("//strong[contains(text(),'Not registered?')]");
     public static final By ERROR_MESSAGE = By.cssSelector(".alert");
     public static final By EMPTY_FIELD_MESSAGE = By.xpath("//label[@class='error']");
 
@@ -33,11 +33,13 @@ public class LoginPage extends BasePage {
     }
 
     public void checkThatMessageAppear() {
-      driver.findElement(EMPTY_FIELD_MESSAGE).isDisplayed();
+        driver.findElement(EMPTY_FIELD_MESSAGE).isDisplayed();
     }
 
     public RegisterPage toRegisterPage() {
+
         driver.findElement(REGISTER_PAGE).click();
+
         return new RegisterPage(driver);
     }
 
@@ -58,7 +60,7 @@ public class LoginPage extends BasePage {
     }
 
     public String validateLogin() {
-        return  driver.getCurrentUrl();
+        return driver.getCurrentUrl();
     }
 
 
