@@ -1,22 +1,25 @@
 package modal.workouts;
 
+import lombok.Builder;
 import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 @Getter
-
+@Builder
 public class Bike extends BaseWorkout {
-    public static final By PACE = By.cssSelector("#Pace");
-    public static final By PERCEIVED_EFFORT = By.cssSelector("#PerEffort");
-    public static final By MIN_HR = By.cssSelector("#MinHR");
-    public static final By AVG_HR = By.cssSelector("#AvgHR");
-    public static final By MAX_HR = By.cssSelector("#MaxHR");
-    public static final By CALORIES_BURNED = By.cssSelector("#kCal");
-    public static final By BIKE_DROP_DOWN = By.cssSelector("[data-code='run']");
+    private static final By PACE = By.cssSelector("#Pace");
+    private static final By PACE_TYPE = By.cssSelector("#PaceType");
+    private static final By PERCEIVED_EFFORT = By.cssSelector("#PerEffort");
+    private static final By MIN_HR = By.cssSelector("#MinHR");
+    private static final By AVG_HR = By.cssSelector("#AvgHR");
+    private static final By MAX_HR = By.cssSelector("#MaxHR");
+    private static final By CALORIES_BURNED = By.cssSelector("#kCal");
+    private static final By BIKE_DROP_DOWN = By.cssSelector("[data-code='bike']");
 
     String pace;
+    String paceType;
     String perceivedEffort;
     int minHR;
     int avgHR;
@@ -25,18 +28,25 @@ public class Bike extends BaseWorkout {
 
     public Bike(WebDriver driver, String date, String timeOfDay,
                 String workoutName, String description,
-                String duration, String pace, int distance,
+                String duration, String pace, String paceType, int distance,
+                String distanceType,
                 String feel, String perceivedEffort,
                 int minHR, int avgHR, int maxHR, int caloriesBurned) {
 
-        super(driver, date, timeOfDay, workoutName, description, duration, distance, feel);
+        super(driver, date, timeOfDay, workoutName, description, duration, distance, distanceType, feel);
         this.pace = pace;
         this.minHR = minHR;
         this.avgHR = avgHR;
         this.maxHR = maxHR;
         this.caloriesBurned = caloriesBurned;
         this.perceivedEffort = perceivedEffort;
+        this.paceType = paceType;
 
+    }
+
+    public void fillPaceType(Bike bike) {
+        Select selectPaceType = new Select(driver.findElement(PACE_TYPE));
+        selectPaceType.selectByVisibleText(bike.getPaceType());
     }
 
     public void fillPace(Bike bike) {
@@ -72,6 +82,7 @@ public class Bike extends BaseWorkout {
 
 
     public void fillThisClassFields(BaseWorkout bike) {
+        fillPaceType((Bike) bike);
         fillPace((Bike) bike);
         fillPerceivedEffort((Bike) bike);
         fillMinHR((Bike) bike);
@@ -79,15 +90,18 @@ public class Bike extends BaseWorkout {
         fillMaxHR((Bike) bike);
         fillCaloriesBurned((Bike) bike);
     }
+
+
     @Override
-    public Bike fillAllFields(BaseWorkout workout) {
+    public Bike fillAllFields(BaseWorkout workout, String subtype) {
+        selectSubType(subtype);
         fillDefaults(workout);
         fillThisClassFields(workout);
         return this;
     }
 
     @Override
-    public BaseWorkout openDropDown() {
+    public Bike openDropDown() {
         driver.findElement(BIKE_DROP_DOWN).click();
         return this;
     }

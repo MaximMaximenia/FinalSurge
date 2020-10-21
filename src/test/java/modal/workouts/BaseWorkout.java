@@ -5,6 +5,8 @@ import lombok.Setter;
 import lombok.ToString;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import pages.BasePage;
 
 @Setter
@@ -17,8 +19,10 @@ public abstract class BaseWorkout extends BasePage {
     public static final By DESCRIPTION = By.cssSelector("#Desc");
     public static final By DURATION = By.cssSelector("#Duration");
     public static final By DISTANCE = By.cssSelector("#Distance");
+    public static final By DISTANCE_TYPE = By.cssSelector("#DistType");
     public static final By SAVE_BUTTON = By.cssSelector("#saveButton");
     public static final String FEEL = "//span[contains(text(),'%s')]/..//input";
+    public static final String SUBTYPE = "//*[@class='nav nav-list']//li[@class='subtypeselector']//a[contains(text(),'%s')]";
 
     String date;
     String timeOfDay;
@@ -27,9 +31,10 @@ public abstract class BaseWorkout extends BasePage {
     String duration;
     String feel;
     int distance;
+    String distanceType;
 
 
-    public BaseWorkout(WebDriver driver, String date, String timeOfDay, String workoutName, String description, String duration, int distance, String feel) {
+    public BaseWorkout(WebDriver driver, String date, String timeOfDay, String workoutName, String description, String duration, int distance,String distanceType, String feel) {
         super(driver);
         this.feel = feel;
         this.date = date;
@@ -39,6 +44,11 @@ public abstract class BaseWorkout extends BasePage {
         this.duration = duration;
         this.distance = distance;
 
+    }
+
+    public void fillDistanceType(BaseWorkout baseWorkout) {
+        Select selectDistanceType = new Select(driver.findElement(DISTANCE_TYPE));
+        selectDistanceType.selectByVisibleText(baseWorkout.getDistanceType());
     }
 
     public void fillDate(BaseWorkout baseWorkout) {
@@ -67,23 +77,34 @@ public abstract class BaseWorkout extends BasePage {
         driver.findElement(DISTANCE).sendKeys(baseWorkout.getDistance() + "");
     }
 
-    public void fillFell(BaseWorkout baseWorkout) {
+    public void fillFeel(BaseWorkout baseWorkout) {
         driver.findElement(By.xpath(String.format(FEEL, baseWorkout.getFeel()))).click();
     }
-    public void fillDefaults(BaseWorkout workout){
+
+    public void fillDefaults(BaseWorkout workout) {
         fillDate(workout);
         fillTimeOfDay(workout);
         fillWorkoutName(workout);
         fillDescription(workout);
         fillDuration(workout);
         fillDistance(workout);
-        fillFell(workout);
+        fillFeel(workout);
+        fillDistanceType(workout);
     }
-    public void clickAddWorkout(){
+
+    public BaseWorkout selectSubType(String subtype) {
+
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(SUBTYPE, subtype))));
+        driver.findElement(By.xpath(String.format(SUBTYPE, subtype))).click();
+
+        return this;
+    }
+
+    public void clickAddWorkout() {
         driver.findElement(SAVE_BUTTON).click();
     }
 
-    public abstract BaseWorkout fillAllFields(BaseWorkout workout);
+    public abstract BaseWorkout fillAllFields(BaseWorkout workout, String subtype);
 
     public abstract BaseWorkout openDropDown();
 }

@@ -44,7 +44,7 @@ public class TestListener implements ITestListener {
         try {
             return ((TakesScreenshot) context.getAttribute("driver")).getScreenshotAs(OutputType.BYTES);
         } catch (NoSuchSessionException | IllegalStateException ex) {
-            return null;
+            return new byte[]{};
         }
     }
 

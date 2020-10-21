@@ -6,6 +6,7 @@ import org.testng.ITestContext;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
+import pages.CalendarPage;
 import steps.LoginSteps;
 import steps.RegistrationSteps;
 import steps.WorkoutSteps;
@@ -20,10 +21,11 @@ public class BaseTest {
     LoginSteps loginSteps;
     WorkoutSteps workoutSteps;
     RegistrationSteps registrationSteps;
+    CalendarPage calendarPage;
 
     @BeforeMethod
     public void setUp(ITestContext context) {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
+
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -32,6 +34,7 @@ public class BaseTest {
         workoutSteps = new WorkoutSteps(driver);
         registrationSteps = new RegistrationSteps(driver);
         context.setAttribute("driver", driver);
+        calendarPage = new CalendarPage(driver);
         loginSteps.openPage();
 
     }
@@ -39,6 +42,10 @@ public class BaseTest {
     @AfterMethod(alwaysRun = true)
     public void closeBrowser() {
         driver.quit();
+        if(driver != null) {
+            driver.quit();
+        }
+
 
     }
 }

@@ -9,11 +9,17 @@ public class WorkoutSteps extends BaseSteps {
         super(driver);
     }
 
-    public void createWorkout(BaseWorkout baseWorkout) {
+    public WorkoutSteps clickFullAddWorkoutByDay(){
+        workoutPage
+                .openCalendarPage()
+                .clickFullAddWorkoutByDay("6");
+        return this;
+    }
+    public void createWorkout(BaseWorkout baseWorkout,String subtype) {
         baseWorkout
                 .openDropDown()
-                .fillAllFields(baseWorkout)
-                .clickAddWorkout();
+                .fillAllFields(baseWorkout,subtype)
+                 .clickAddWorkout();
 
     }
 }
