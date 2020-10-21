@@ -42,9 +42,9 @@ public class  Bike extends BaseWorkout {
 
     }
 
-    public void fillPaceType(Bike bike) {
+    public void fillPaceType() {
         Select selectPaceType = new Select(driver.findElement(PACE_TYPE));
-        selectPaceType.selectByValue(bike.getPaceType());
+        selectPaceType.selectByIndex(1);
     }
 
     public void fillPace(Bike bike) {
@@ -80,7 +80,7 @@ public class  Bike extends BaseWorkout {
 
 
     public void fillThisClassFields(BaseWorkout bike) {
-        fillPaceType((Bike) bike);
+        fillPaceType();
         fillPace((Bike) bike);
         fillPerceivedEffort((Bike) bike);
         fillMinHR((Bike) bike);
