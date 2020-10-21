@@ -10,7 +10,7 @@
     <properties>
         <aspectj.version>1.9.1</aspectj.version>
         <maven-surfire-plugin.version>3.0.0-M3</maven-surfire-plugin.version>
-        <testng.version>7.1.0</testng.version>
+        <testng.version>7.0.0</testng.version>
         <selenium.version>3.141.59</selenium.version>
         <allure-maven.version>2.10.0</allure-maven.version>
         <allure-testng.version>2.7.0</allure-testng.version>
@@ -23,7 +23,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.0</version>
+                <version>3.1</version>
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
