@@ -23,7 +23,6 @@ public class BaseTest {
 
     @BeforeMethod
     public void setUp(ITestContext context) {
-        System.setProperty("webdriver.chrome.driver", "src/test/resources/chromedriver.exe");
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
@@ -38,6 +37,6 @@ public class BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void closeBrowser() {
-
+        driver.quit();
     }
 }
