@@ -49,7 +49,7 @@ public abstract class BaseWorkout extends BasePage {
 
     public void fillDistanceType(BaseWorkout baseWorkout) {
         Select selectDistanceType = new Select(driver.findElement(DISTANCE_TYPE));
-        selectDistanceType.selectByVisibleText(baseWorkout.getDistanceType());
+        selectDistanceType.selectByValue(baseWorkout.getDistanceType());
     }
 
     public void fillDate(BaseWorkout baseWorkout) {
