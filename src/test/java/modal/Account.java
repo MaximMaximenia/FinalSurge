@@ -1,11 +1,12 @@
 package modal;
 
-
 public class Account {
     String firsName;
     String lastName;
     String email;
     String password;
+    String reTypePassword;
+    String timeZone;
 
     public Account(String firsName, String lastName, String email, String password, String reTypePassword, String timeZone) {
         this.firsName = firsName;
@@ -15,9 +16,6 @@ public class Account {
         this.reTypePassword = reTypePassword;
         this.timeZone = timeZone;
     }
-
-    String reTypePassword;
-    String timeZone;
 
     public String getFirsName() {
         return firsName;
