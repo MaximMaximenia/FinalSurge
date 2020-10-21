@@ -2,14 +2,18 @@ package tests;
 
 import org.testng.annotations.Test;
 
+import java.util.Random;
+
 public class RegisterTest extends BaseTest {
     @Test
     public void registrationTest() {
+        Random r = new Random();
+
         loginSteps
                 .openPage()
                 .toRegistration();
         registrationSteps
-                .registration("Max", "Olejov", "132sss@mailinator.com",
+                .registration("Max", "Olejov", r.nextInt(1000)+"ls@mailinator.com",
                         "(GMT-07:00) Chihuahua, La Paz, Mazatlan"
                         , "121212112MAs_", "121212112MAs_")
                 .validateRegistration();
@@ -20,7 +24,7 @@ public class RegisterTest extends BaseTest {
                 .openPage()
                 .toRegistration();
         registrationSteps
-                .registration("asda", "asdd", "",
+                .registration("", "", "",
                         "Select..."
                         , "", "")
                 .amountAppearedMessagesShouldBe(6);

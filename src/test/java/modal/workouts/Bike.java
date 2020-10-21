@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 @Getter
-public class Bike extends BaseWorkout {
+public class  Bike extends BaseWorkout {
     private static final By PACE = By.cssSelector("#Pace");
     private static final By PACE_TYPE = By.cssSelector("#PaceType");
     private static final By PERCEIVED_EFFORT = By.cssSelector("#PerEffort");
