@@ -3,7 +3,7 @@ Configuration:
   Properties:
     Property:
       - name: "DefaultPattern"
-        value: "%d{HH:mm:ss} %level [%c] - %msg%n"
+        value: "%d{HH:mm:ss} %level [%t] [%c] - %msg%n"
   Appenders:
     Console:
       name: consoleAppender

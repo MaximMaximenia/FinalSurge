@@ -25,6 +25,7 @@ public abstract class BaseWorkout extends BasePage {
     public static final String SUBTYPE = "//*[@class='nav nav-list']//li[@class='subtypeselector']//a[contains(text(),'%s')]";
 
     String date;
+
     String timeOfDay;
     String workoutName;
     String description;
@@ -107,6 +108,8 @@ public abstract class BaseWorkout extends BasePage {
     public abstract BaseWorkout fillAllFields(BaseWorkout workout, String subtype);
 
     public abstract BaseWorkout openDropDown();
+
+
 }
 
 
