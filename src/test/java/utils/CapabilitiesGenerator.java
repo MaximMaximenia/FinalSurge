@@ -13,7 +13,7 @@ public class CapabilitiesGenerator {
         } else if (os.contains("mac")) {
             System.setProperty("webdriver.chrome.driver", driverPath + "/chromedriver");
         } else {
-            System.setProperty("webdriver.chrome.driver", driverPath + "/chromedriver");
+            System.setProperty("webdriver.chrome.driver", driverPath + "/linux/chromedriver");
         }
         options.addArguments("--ignore-certificate-errors");
         options.addArguments("--disable-popup-blocking");
