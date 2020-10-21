@@ -7,7 +7,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.Select;
 
 @Getter
-@Builder
 public class Bike extends BaseWorkout {
     private static final By PACE = By.cssSelector("#Pace");
     private static final By PACE_TYPE = By.cssSelector("#PaceType");
