@@ -1,8 +1,5 @@
 package modal;
 
-import lombok.Data;
-
-
 public class Account {
     String firsName;
     String lastName;
