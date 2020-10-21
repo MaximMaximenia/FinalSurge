@@ -3,8 +3,6 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.util.Calendar;
-
 public class BasePage {
     public static final String BASE_URL = "https://log.finalsurge.com/";
     public static final String ADD_WORKOUT_URL = BASE_URL+"WorkoutAdd.cshtml";
