@@ -1,6 +1,6 @@
 package pages;
 
-import modal.workouts.BaseWorkout;
+import models.workouts.BaseWorkout;
 import org.openqa.selenium.WebDriver;
 
 public class WorkoutPage extends BasePage{
@@ -14,4 +14,5 @@ public void addWorkout(BaseWorkout baseWorkout,String subType){
         baseWorkout.fillAllFields(baseWorkout,subType);
         baseWorkout.clickAddWorkout();
 }
+
 }

@@ -1,67 +1,79 @@
 package tests;
 
+import models.Account;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.util.Random;
 
 public class RegisterTest extends BaseTest {
+    Random r = new Random();
+    Account defaultUser = Account.builder().firsName("Agent").lastName("AsdaAs").email(r.nextInt(1000) + "ls@mailinator.com").timeZone("(GMT-07:00) Chihuahua, La Paz, Mazatlan").password("121212112MAs_").reTypePassword("121212112MAs_").build();
+    Account emptyUser = Account.builder().firsName("").lastName("").email("").timeZone("").password("").reTypePassword("").build();
+    Account registered = Account.builder().firsName("Agent").lastName("AsdaAs").email("132sss@mailinator.com").timeZone("(GMT-07:00) Chihuahua, La Paz, Mazatlan").password("121212112MAs_").reTypePassword("121212112MAs_").build();
+    Account notCorrectPassword = Account.builder().firsName("Agent").lastName("AsdaAs").email(r.nextInt(1000) + "ls@mailinator.com").timeZone("(GMT-07:00) Chihuahua, La Paz, Mazatlan").password("121").reTypePassword("121").build();
+    Account passwordDidNotMatch = Account.builder().firsName("Agent").lastName("AsdaAs").email(r.nextInt(1000) + "ls@mailinator.com").timeZone("(GMT-07:00) Chihuahua, La Paz, Mazatlan").password("1111111Sa").reTypePassword("2222222As").build();
+
+    @DataProvider(name = "Errors")
+    public Object[][] errors() {
+        return new Object[][]{
+                {registered, "Error: There is already a user account associated with this Email Address." +
+                        " Please retrieve your password or create an account with a different address."},
+                {notCorrectPassword, "Error: *Please enter a Password value with at least one number," +
+                        " lower-case letter, and upper-case letter between 7 and 15 characters in length."},
+                {passwordDidNotMatch, "Error: The passwords you entered did not match."}};
+    }
+
+    @DataProvider(name = "Password Complexity")
+    public Object[][] complexity() {
+        return new Object[][]{
+                {"1234321", "WEAK"},
+                {"1234321LAsa", "MEDIUM"},
+                {"1234321LAsa_", "STRONG"},
+                {"1234321LAsa_-", "VERY STRONG"},
+        };
+    }
+
+    @Test(dataProvider = "Errors")
+    public void checkErrors(Account account, String error) {
+        loginSteps
+                .openPage()
+                .toRegistration();
+        registrationSteps
+                .registration(account)
+                .errorMessageShouldBe(error);
+    }
+
+    @Test(dataProvider = "Password Complexity")
+    public void checkPasswordComplexity(String password, String complexity) {
+        loginSteps
+                .openPage()
+                .toRegistration();
+        registrationSteps
+                .passwordComplexityShouldBe(password, complexity);
+
+    }
+
     @Test
     public void registrationTest() {
-        Random r = new Random();
+
 
         loginSteps
                 .openPage()
                 .toRegistration();
         registrationSteps
-                .registration("Max", "Olejov", r.nextInt(1000)+"ls@mailinator.com",
-                        "(GMT-07:00) Chihuahua, La Paz, Mazatlan"
-                        , "121212112MAs_", "121212112MAs_")
+                .registration(defaultUser)
                 .validateRegistration();
     }
+
     @Test
     public void checkingThatMessagesAppearUnderEmptyInputs() {
         loginSteps
                 .openPage()
                 .toRegistration();
         registrationSteps
-                .registration("", "", "",
-                        "Select..."
-                        , "", "")
+                .registration(emptyUser)
                 .amountAppearedMessagesShouldBe(6);
     }
-    @Test
-    public void checkRegisteredUserError() {
-        loginSteps
-                .openPage()
-                .toRegistration();
-        registrationSteps
-                .registration("Max", "Olejov", "132sss@mailinator.com",
-                        "(GMT-07:00) Chihuahua, La Paz, Mazatlan"
-                        , "121212112MAs_", "121212112MAs_")
-                .errorMessageShouldBe("Error: There is already a user account associated with this Email Address." +
-                        " Please retrieve your password or create an account with a different address.");
-    }
-    @Test
-    public void checkPasswordDidNotMatchError() {
-        loginSteps
-                .openPage()
-                .toRegistration();
-        registrationSteps
-                .registration("Max", "Olejov", "132sss@mailinator.com",
-                        "(GMT-07:00) Chihuahua, La Paz, Mazatlan"
-                        , "121212112MAs", "121212112MAs_")
-                .errorMessageShouldBe("Error: The passwords you entered did not match.");
-    }
-    @Test
-    public void checkShortPasswordError() {
-        loginSteps
-                .openPage()
-                .toRegistration();
-        registrationSteps
-                .registration("Max", "Olejov", "132sss@mailinator.com",
-                        "(GMT-07:00) Chihuahua, La Paz, Mazatlan"
-                        , "12", "12")
-                .errorMessageShouldBe("Error: *Please enter a Password value with at least one number," +
-                        " lower-case letter, and upper-case letter between 7 and 15 characters in length.");
-    }
+
 }

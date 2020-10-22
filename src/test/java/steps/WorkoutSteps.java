@@ -1,6 +1,6 @@
 package steps;
 
-import modal.workouts.BaseWorkout;
+import models.workouts.BaseWorkout;
 import org.openqa.selenium.WebDriver;
 
 public class WorkoutSteps extends BaseSteps {

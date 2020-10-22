@@ -1,6 +1,6 @@
 package pages;
 
-import modal.Account;
+import models.Account;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,6 +8,7 @@ import org.openqa.selenium.support.ui.Select;
 
 import java.util.List;
 
+import static java.lang.String.format;
 import static org.testng.Assert.assertEquals;
 
 public class RegisterPage extends BasePage {
@@ -27,11 +28,11 @@ public class RegisterPage extends BasePage {
 
         Select select = new Select(driver.findElement(SELECT_TIME_ZONE));
         select.selectByVisibleText(account.getTimeZone());
-        driver.findElement(By.xpath(String.format(XPATH_FOR_INPUTS, "First Name"))).sendKeys(account.getFirsName());
-        driver.findElement(By.xpath(String.format(XPATH_FOR_INPUTS, "Last Name"))).sendKeys(account.getLastName());
-        driver.findElement(By.xpath(String.format(XPATH_FOR_INPUTS, "Email Address"))).sendKeys(account.getEmail());
-        driver.findElement(By.xpath(String.format(XPATH_FOR_INPUTS, "Password"))).sendKeys(account.getPassword());
-        driver.findElement(By.xpath(String.format(XPATH_FOR_INPUTS, "Re-type password"))).sendKeys(account.getReTypePassword());
+        driver.findElement(By.xpath(format(XPATH_FOR_INPUTS, "First Name"))).sendKeys(account.getFirsName());
+        driver.findElement(By.xpath(format(XPATH_FOR_INPUTS, "Last Name"))).sendKeys(account.getLastName());
+        driver.findElement(By.xpath(format(XPATH_FOR_INPUTS, "Email Address"))).sendKeys(account.getEmail());
+        driver.findElement(By.xpath(format(XPATH_FOR_INPUTS, "Password"))).sendKeys(account.getPassword());
+        driver.findElement(By.xpath(format(XPATH_FOR_INPUTS, "Re-type password"))).sendKeys(account.getReTypePassword());
         return this;
 
     }
@@ -42,8 +43,10 @@ public class RegisterPage extends BasePage {
     }
 
 
-    public void passwordComplexityShouldBe(String expectedComplexity) {
-        assertEquals(driver.findElement(PASSWORD_COMPLEXITY).getText(), expectedComplexity);
+    public String sendPasswordAndGetComplexity(String passsword) {
+        driver.findElement(By.xpath(format(XPATH_FOR_INPUTS, "Password"))).sendKeys(passsword);
+
+        return driver.findElement(PASSWORD_COMPLEXITY).getText();
     }
 
     public int getAmountEmptyInputs() {
