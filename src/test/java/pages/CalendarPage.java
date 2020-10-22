@@ -18,12 +18,11 @@ public class CalendarPage extends BasePage {
     public static final String WEEK_SORT = "//ul[@class='dropdown-menu']//a[contains(text(),'%s')]";
 
 
-
     public CalendarPage(WebDriver driver) {
         super(driver);
     }
 
-    public void openCalendarMenuByDayAndSelectOptionInDropdown(String day,String option) {
+    public void openCalendarMenuByDayAndSelectOptionInDropdown(String day, String option) {
         Actions actions = new Actions(driver);
         WebElement calendarPlus = driver.findElement(By.xpath(format(CALENDAR_PLUS, day)));
         actions.moveToElement(calendarPlus).perform();
@@ -33,12 +32,12 @@ public class CalendarPage extends BasePage {
 
 
     public WorkoutPage clickFullAddWorkoutByDay(String day) {
-        openCalendarMenuByDayAndSelectOptionInDropdown(day,"Full Add");
+        openCalendarMenuByDayAndSelectOptionInDropdown(day, "Full Add");
         return new WorkoutPage(driver);
     }
 
     public void clickQuickAddWorkoutByDay(String day) {
-        openCalendarMenuByDayAndSelectOptionInDropdown(day,"Quick Add");
+        openCalendarMenuByDayAndSelectOptionInDropdown(day, "Quick Add");
     }
 
     public void selectSortWeeksAmount(String weeksSort) {
@@ -54,8 +53,9 @@ public class CalendarPage extends BasePage {
         driver.findElement(By.xpath(format(SORT, sortType))).click();
 
     }
+
     public CopyMoveDeleteFrame clickCopyMoveDeleteWorkoutByDay(String day) {
-        openCalendarMenuByDayAndSelectOptionInDropdown(day,"'Copy/Move/Delete");
+        openCalendarMenuByDayAndSelectOptionInDropdown(day, "'Copy/Move/Delete");
         return new CopyMoveDeleteFrame(driver);
     }
 

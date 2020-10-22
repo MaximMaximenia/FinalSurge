@@ -19,18 +19,20 @@ public class RegistrationSteps extends BaseSteps {
     }
 
     public void amountAppearedMessagesShouldBe(int amountEmptyInputs) {
-        assertEquals(registerPage.getAmountEmptyInputs(),amountEmptyInputs);
+        assertEquals(registerPage.getAmountEmptyInputs(), amountEmptyInputs);
     }
 
     public void validateRegistration() {
         registerPage
                 .validateRegistration();
     }
-    public void errorMessageShouldBe(String error){
+
+    public void errorMessageShouldBe(String error) {
         registerPage.
                 errorMessageShouldBe(error);
     }
-    public void passwordComplexityShouldBe(String password,String complexity){
-        assertEquals(registerPage.sendPasswordAndGetComplexity(password),complexity);
+
+    public void passwordComplexityShouldBe(String password, String complexity) {
+        assertEquals(registerPage.sendPasswordAndGetComplexity(password), complexity);
     }
 }

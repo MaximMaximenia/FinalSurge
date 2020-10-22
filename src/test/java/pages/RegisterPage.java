@@ -51,7 +51,7 @@ public class RegisterPage extends BasePage {
 
     public int getAmountEmptyInputs() {
 
-      List<WebElement> allAppearedMessages = driver.findElements(By.xpath(GET_ERROR_UNDER_LOCATORS));
+        List<WebElement> allAppearedMessages = driver.findElements(By.xpath(GET_ERROR_UNDER_LOCATORS));
         return allAppearedMessages.size();
     }
 
@@ -59,7 +59,8 @@ public class RegisterPage extends BasePage {
         assertEquals(driver.findElement(ERROR_MESSAGE).getText(), error);
 
     }
-    public void validateRegistration(){
+
+    public void validateRegistration() {
         driver.findElement(VALIDATE).isDisplayed();
     }
 }

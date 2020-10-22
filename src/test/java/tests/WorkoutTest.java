@@ -10,7 +10,7 @@ public class WorkoutTest extends BaseTest {
     @Test
     public void addWorkout() {
         Bike bike = new Bike(driver, "10/23/2020", "05:45 AM", "bitka"
-                , "kachat' bitky", "01:00:22", "2:21", "min/mi",12,"km" ,"Poor",
+                , "kachat' bitky", "01:00:22", "2:21", "min/mi", 12, "km", "Poor",
                 "3 (Light)", 60, 70, 90, 2000);
         loginSteps
                 .login("masya@mail.ru", "1234321MAks__", false)
@@ -25,7 +25,7 @@ public class WorkoutTest extends BaseTest {
     @Test
     public void addFullWorkoutIntoCalendar() {
         Bike bike = new Bike(driver, "10/23/2020", "05:45 AM", "bitka"
-                , "kachat' bitky", "01:00:22", "2:21", "min/mi",12,"km" ,"Poor",
+                , "kachat' bitky", "01:00:22", "2:21", "min/mi", 12, "km", "Poor",
                 "3 (Light)", 60, 70, 90, 2000);
 
         loginSteps
@@ -33,14 +33,15 @@ public class WorkoutTest extends BaseTest {
 
         calendarPage
                 .clickFullAddWorkoutByDay("6")
-                .addWorkout(bike,"Long Ride");
+                .addWorkout(bike, "Long Ride");
 
 
     }
+
     @Test
     public void addQuickWorkoutIntoCalendar() {
         Bike bike = new Bike(driver, "10/23/2020", "05:45 AM", "bitka"
-                , "kachat' bitky", "01:00:22", "2:21", "min/mi",12,"km" ,"Poor",
+                , "kachat' bitky", "01:00:22", "2:21", "min/mi", 12, "km", "Poor",
                 "3 (Light)", 60, 70, 90, 2000);
 
         loginSteps
@@ -48,7 +49,7 @@ public class WorkoutTest extends BaseTest {
 
         calendarPage
                 .clickFullAddWorkoutByDay("6")
-                .addWorkout(bike,"Long Ride");
+                .addWorkout(bike, "Long Ride");
 
 
     }
