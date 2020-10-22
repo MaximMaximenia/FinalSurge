@@ -5,8 +5,8 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class BasePage {
     public static final String BASE_URL = "https://log.finalsurge.com/";
-    public static final String ADD_WORKOUT_URL = BASE_URL+"WorkoutAdd.cshtml";
-    public static final String CALENDAR_URL = BASE_URL+"Calendar.cshtml?v=m&amp;y=2020&amp;m=9&amp;d=16";
+    public static final String ADD_WORKOUT_URL = BASE_URL + "WorkoutAdd.cshtml";
+    public static final String CALENDAR_URL = BASE_URL + "Calendar.cshtml?v=m&amp;y=2020&amp;m=9&amp;d=16";
     public WebDriverWait wait;
     public WebDriver driver;
 
@@ -19,11 +19,12 @@ public class BasePage {
         return driver.getCurrentUrl();
     }
 
-    public WorkoutPage toWorkoutPage(){
+    public WorkoutPage toWorkoutPage() {
         driver.get(ADD_WORKOUT_URL);
         return new WorkoutPage(driver);
     }
-    public CalendarPage openCalendarPage(){
+
+    public CalendarPage openCalendarPage() {
         driver.get(CALENDAR_URL);
         return new CalendarPage(driver);
 

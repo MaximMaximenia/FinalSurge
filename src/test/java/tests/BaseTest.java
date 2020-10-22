@@ -14,6 +14,7 @@ import utils.CapabilitiesGenerator;
 import utils.TestListener;
 
 import java.util.concurrent.TimeUnit;
+
 @Listeners(TestListener.class)
 public class BaseTest {
     WebDriver driver;
@@ -40,7 +41,7 @@ public class BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void closeBrowser() {
-        if(driver != null) {
+        if (driver != null) {
             driver.quit();
         }
 

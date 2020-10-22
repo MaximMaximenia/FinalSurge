@@ -1,6 +1,6 @@
 package models.workouts;
 
-import lombok.*;
+import lombok.Getter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -31,7 +31,7 @@ public abstract class BaseWorkout extends BasePage {
     String distanceType;
 
 
-    public BaseWorkout(WebDriver driver, String date, String timeOfDay, String workoutName, String description, String duration, int distance,String distanceType, String feel) {
+    public BaseWorkout(WebDriver driver, String date, String timeOfDay, String workoutName, String description, String duration, int distance, String distanceType, String feel) {
         super(driver);
         this.feel = feel;
         this.date = date;
