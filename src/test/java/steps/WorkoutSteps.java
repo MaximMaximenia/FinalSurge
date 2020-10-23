@@ -14,8 +14,8 @@ public class WorkoutSteps extends BaseSteps {
                 .openCalendarPage()
                 .clickFullAddWorkoutByDay("6");
         return this;
-    }
-
+    }}
+/*
     public void createWorkout(BaseWorkout baseWorkout, String subtype) {
         baseWorkout
                 .openDropDown()
@@ -23,4 +23,4 @@ public class WorkoutSteps extends BaseSteps {
                 .clickAddWorkout();
 
     }
-}
+}*/
