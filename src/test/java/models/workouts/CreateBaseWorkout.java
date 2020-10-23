@@ -1,4 +1,4 @@
-package pages.createWorkout;
+package models.workouts;
 
 import models.workouts.BaseWorkout;
 import org.openqa.selenium.By;

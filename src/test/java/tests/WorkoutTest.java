@@ -2,9 +2,7 @@ package tests;
 
 
 import models.workouts.BaseWorkout;
-import models.workouts.Bike;
 import org.testng.annotations.Test;
-import pages.createWorkout.CreateBaseWorkout;
 
 public class WorkoutTest extends BaseTest {
 
@@ -42,7 +40,7 @@ public class WorkoutTest extends BaseTest {
         loginSteps
                 .login("masya@mail.ru", "1234321MAks__", false)
                 .toWorkoutPage();
-        createBikeWorkout
+        workoutPage
                 .createBikeWorkout(bike);
 
     }
@@ -61,8 +59,7 @@ public class WorkoutTest extends BaseTest {
 
     @Test
     public void addQuickWorkoutIntoCalendar() {
-        Bike bike = (Bike) Bike.builder().date("s").build();
-        new CreateBaseWorkout(driver).fillAvgHR(bike);
+
     }
 
 
