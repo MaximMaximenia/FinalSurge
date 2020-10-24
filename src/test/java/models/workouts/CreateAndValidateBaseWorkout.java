@@ -9,7 +9,7 @@ import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static org.testng.Assert.assertEquals;
 
-public class CreateBaseWorkout extends BasePage {
+public class CreateAndValidateBaseWorkout extends BasePage {
 
     private static final String FEEL = "//span[contains(text(),'%s')]/..//input";
     private static final String SUBTYPE = "//*[@class='nav nav-list']//li[@class='subtypeselector']//a[contains(text(),'%s')]";
@@ -20,9 +20,9 @@ public class CreateBaseWorkout extends BasePage {
     private static final By DURATION = By.cssSelector("#Duration");
     private static final By DISTANCE = By.cssSelector("#Distance");
     private static final By DISTANCE_TYPE = By.cssSelector("#DistType");
-    private static final By SAVE_BUTTON = By.cssSelector("#saveButton");
     private static final By PACE = By.cssSelector("#Pace");
     private static final By PACE_TYPE = By.cssSelector("#PaceType");
+    private static final By SAVE_BUTTON = By.cssSelector("#saveButton");
     private static final String SELECT_OPTION = "//select[@id='%s']//option[text()='%s']";
     private static final By PERCEIVED_EFFORT = By.cssSelector("#PerEffort");
     private static final By MIN_HR = By.cssSelector("#MinHR");
@@ -40,10 +40,68 @@ public class CreateBaseWorkout extends BasePage {
     private static final By VALIDATE_SUBTYPE = By.cssSelector(".subtypeselector.active");
     private static final By ELEVATION_LOSS_TYPE = By.cssSelector("#ELossDistType");
     private static final String DROP_DOWN = "[data-code='%s']";
+    //Cross and Strength Training Locators
+    private static final By DISTANCE_TYPE_NO_INT = By.cssSelector("#DistTypeNoInt");
+    private static final By DISTANCE_NO_INT = By.cssSelector("#DistanceNoInt");
+    private static final By DURATION_NO_INT = By.cssSelector("#DurationNoInt");
 
-
-    public CreateBaseWorkout(WebDriver driver) {
+    public CreateAndValidateBaseWorkout(WebDriver driver) {
         super(driver);
+    }
+
+    protected void createCrossTraining(BaseWorkout workout) {
+        fillDefaults(workout);
+        fillTimeOfDay(workout);
+        driver.findElement(DISTANCE_TYPE_NO_INT).click();
+        driver.findElement(By.xpath(format(SELECT_OPTION, "DistTypeNoInt", workout.getDistanceType()))).click();
+        driver.findElement(DISTANCE_NO_INT).sendKeys(valueOf(workout.getDistance()));
+        driver.findElement(By.xpath(format(SELECT_OPTION, "PaceTypeNoInt", workout.getPaceType()))).click();
+        driver.findElement(DURATION_NO_INT).sendKeys(workout.getDuration());
+        fillFeel(workout);
+        fillMinHR(workout);
+        fillMaxHR(workout);
+        fillAvgHR(workout);
+        fillPerceivedEffort(workout);
+        fillCaloriesBurned(workout);
+
+    }
+
+    protected void createStrengthTraining(BaseWorkout workout) {
+        fillDefaults(workout);
+        fillTimeOfDay(workout);
+        driver.findElement(DURATION_NO_INT).sendKeys(workout.getDuration());
+        fillFeel(workout);
+        fillPerceivedEffort(workout);
+
+    }
+
+    protected void validateCrossTraining(BaseWorkout workout) {
+        validateDefaults(workout);
+        validateTimeOfDay(workout);
+        assertEquals(driver.findElement(DURATION_NO_INT).getAttribute("value"), workout.getDuration());
+        assertEquals(driver.findElement(DISTANCE_NO_INT).getAttribute("value"), valueOf(workout.getDistance()));
+        assertEquals(getSelectedOption("DistTypeNoInt"),workout.getDistanceType());
+        assertEquals(getSelectedOption("PaceTypeNoInt"),workout.getPaceType());
+        validateFeel(workout);
+        validatePerceivedEffort(workout);
+        validateMinHR(workout);
+        validateMaxHR(workout);
+        validateAvgHR(workout);
+        validateCaloriesBurned(workout);
+    }
+
+    protected void validateStrengthTraining(BaseWorkout workout) {
+        validateDefaults(workout);
+        validateTimeOfDay(workout);
+        assertEquals(driver.findElement(DURATION_NO_INT).getAttribute("value"), workout.getDuration());
+        validateFeel(workout);
+        validatePerceivedEffort(workout);
+    }
+
+    protected void validateDefaults(BaseWorkout workout) {
+        validateDate(workout);
+        validateWorkoutDescription(workout);
+        validateWorkoutName(workout);
     }
 
     protected String getSelectedOption(String selectID) {
@@ -152,7 +210,6 @@ public class CreateBaseWorkout extends BasePage {
         assertEquals(elevationLoss.substring(0, elevationLoss.indexOf(".")), valueOf(workout.getElevationLoss()));
     }
 
-
     protected void selectSubType(BaseWorkout workout) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(format(SUBTYPE, workout.getSubType()))));
         driver.findElement(By.xpath(format(SUBTYPE, workout.getSubType()))).click();
@@ -173,6 +230,12 @@ public class CreateBaseWorkout extends BasePage {
     protected void fillAvgCadence(BaseWorkout baseWorkout) {
         driver.findElement(AVG_CADENCE).clear();
         driver.findElement(AVG_CADENCE).sendKeys(valueOf(baseWorkout.getAvgCadence()));
+    }
+
+    protected void fillDefaults(BaseWorkout workout) {
+        fillDate(workout);
+        fillWorkoutName(workout);
+        fillDescription(workout);
     }
 
     protected void fillMaxCadence(BaseWorkout baseWorkout) {
@@ -227,6 +290,7 @@ public class CreateBaseWorkout extends BasePage {
     }
 
     protected void fillDistance(BaseWorkout baseWorkout) {
+        wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(DISTANCE));
         driver.findElement(DISTANCE).clear();
         driver.findElement(DISTANCE).sendKeys(baseWorkout.getDistance() + "");
     }
@@ -239,10 +303,11 @@ public class CreateBaseWorkout extends BasePage {
     protected void fillPaceType(BaseWorkout baseWorkout) {
         driver.findElement(PACE_TYPE).click();
         driver.findElement(By.xpath(format(SELECT_OPTION, "PaceType", baseWorkout.getPaceType()))).click();
-        driver.findElement(PACE).clear();
+
     }
 
     protected void fillPace(BaseWorkout baseWorkout) {
+        driver.findElement(PACE).clear();
         driver.findElement(PACE).sendKeys(baseWorkout.getPace());
     }
 

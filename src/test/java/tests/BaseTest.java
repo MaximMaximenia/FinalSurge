@@ -44,12 +44,11 @@ public class BaseTest {
 
     @AfterMethod(alwaysRun = true)
     public void closeBrowser() {
-/*
+
         if (driver != null) {
             driver.quit();
         }
 
-*/
 
     }
 }
