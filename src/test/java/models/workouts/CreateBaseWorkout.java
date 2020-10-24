@@ -1,166 +1,286 @@
 package models.workouts;
 
-import models.workouts.BaseWorkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import pages.BasePage;
 
 import static java.lang.String.format;
+import static java.lang.String.valueOf;
+import static org.testng.Assert.assertEquals;
 
 public class CreateBaseWorkout extends BasePage {
-    public static final String FEEL = "//span[contains(text(),'%s')]/..//input";
-    public static final String SUBTYPE = "//*[@class='nav nav-list']//li[@class='subtypeselector']//a[contains(text(),'%s')]";
-    public static final By DATE = By.cssSelector("#WorkoutDate");
-    public static final By TIME_OF_DAY = By.cssSelector("#WorkoutTime");
-    public static final By WORKOUT_NAME = By.cssSelector("#Name");
-    public static final By DESCRIPTION = By.cssSelector("#Desc");
-    public static final By DURATION = By.cssSelector("#Duration");
-    public static final By DISTANCE = By.cssSelector("#Distance");
-    public static final By DISTANCE_TYPE = By.cssSelector("#DistType");
-    public static final By SAVE_BUTTON = By.cssSelector("#saveButton");
-    public static final By PACE = By.cssSelector("#Pace");
-    public static final By PACE_TYPE = By.cssSelector("#PaceType");
-    public static final String SELECT_OPTION = "//select[@id='%s']//option[text()='%s']";
 
-    public static final By PERCEIVED_EFFORT = By.cssSelector("#PerEffort");
-    public static final By MIN_HR = By.cssSelector("#MinHR");
-    public static final By AVG_HR = By.cssSelector("#AvgHR");
-    public static final By MAX_HR = By.cssSelector("#MaxHR");
-    public static final By CALORIES_BURNED = By.cssSelector("#kCal");
-    public static final By AVG_POWER = By.cssSelector("#PowAvg");
-    public static final By MAX_POWER = By.cssSelector("#PowMax");
-    public static final By AVG_CADENCE = By.cssSelector("#CadAvg");
-    public static final By MAX_CADENCE = By.cssSelector("#CadMax");
-    public static final By ELEVATION_GAIN = By.cssSelector("#EGain");
-    public static final By ELEVATION_GAIN_TYPE = By.cssSelector("#EGainDistType");
-    public static final By ELEVATION_LOSS = By.cssSelector("#ELoss");
-    public static final By ELEVATION_LOSS_TYPE = By.cssSelector("#ELossDistType");
-    public static final String DROP_DOWN = "[data-code='%s']";
+    private static final String FEEL = "//span[contains(text(),'%s')]/..//input";
+    private static final String SUBTYPE = "//*[@class='nav nav-list']//li[@class='subtypeselector']//a[contains(text(),'%s')]";
+    private static final By DATE = By.cssSelector("#WorkoutDate");
+    private static final By TIME_OF_DAY = By.cssSelector("#WorkoutTime");
+    private static final By WORKOUT_NAME = By.cssSelector("#Name");
+    private static final By DESCRIPTION = By.cssSelector("#Desc");
+    private static final By DURATION = By.cssSelector("#Duration");
+    private static final By DISTANCE = By.cssSelector("#Distance");
+    private static final By DISTANCE_TYPE = By.cssSelector("#DistType");
+    private static final By SAVE_BUTTON = By.cssSelector("#saveButton");
+    private static final By PACE = By.cssSelector("#Pace");
+    private static final By PACE_TYPE = By.cssSelector("#PaceType");
+    private static final String SELECT_OPTION = "//select[@id='%s']//option[text()='%s']";
+    private static final By PERCEIVED_EFFORT = By.cssSelector("#PerEffort");
+    private static final By MIN_HR = By.cssSelector("#MinHR");
+    private static final By AVG_HR = By.cssSelector("#AvgHR");
+    private static final By MAX_HR = By.cssSelector("#MaxHR");
+    private static final String VALIDATE_SELECT = "//select[@id='%s']//option[@selected]";
+    private static final By CALORIES_BURNED = By.cssSelector("#kCal");
+    private static final By AVG_POWER = By.cssSelector("#PowAvg");
+    private static final By MAX_POWER = By.cssSelector("#PowMax");
+    private static final By AVG_CADENCE = By.cssSelector("#CadAvg");
+    private static final By MAX_CADENCE = By.cssSelector("#CadMax");
+    private static final By ELEVATION_GAIN = By.cssSelector("#EGain");
+    private static final By ELEVATION_GAIN_TYPE = By.cssSelector("#EGainDistType");
+    private static final By ELEVATION_LOSS = By.cssSelector("#ELoss");
+    private static final By VALIDATE_SUBTYPE = By.cssSelector(".subtypeselector.active");
+    private static final By ELEVATION_LOSS_TYPE = By.cssSelector("#ELossDistType");
+    private static final String DROP_DOWN = "[data-code='%s']";
 
 
     public CreateBaseWorkout(WebDriver driver) {
         super(driver);
     }
 
-    public void openDropdown(String workoutName) {
+    protected String getSelectedOption(String selectID) {
+        return driver.findElement(By.xpath(format(VALIDATE_SELECT, selectID))).getText();
+    }
+
+    protected void openDropdown(String workoutName) {
         driver.findElement(By.cssSelector(format(DROP_DOWN, workoutName))).click();
     }
 
-    public void selectSubType(BaseWorkout workout) {
+    protected void validateSubType(BaseWorkout workout) {
+        assertEquals(driver.findElement(VALIDATE_SUBTYPE).getText(), workout.getSubType());
+    }
+
+    protected void validateDate(BaseWorkout workout) {
+        assertEquals(driver.findElement(DATE).getAttribute("value"), workout.getDate());
+    }
+
+    protected void validateTimeOfDay(BaseWorkout workout) {
+        assertEquals(driver.findElement(TIME_OF_DAY).getAttribute("value"), workout.getTimeOfDay());
+    }
+
+    protected void validateWorkoutName(BaseWorkout workout) {
+        assertEquals(driver.findElement(WORKOUT_NAME).getAttribute("value"), workout.getWorkoutName());
+    }
+
+    protected void validateWorkoutDescription(BaseWorkout workout) {
+        assertEquals(driver.findElement(DESCRIPTION).getAttribute("value"), workout.getDescription());
+    }
+
+    protected void validateDistanceType(BaseWorkout workout) {
+        assertEquals(getSelectedOption("DistType"), workout.getDistanceType());
+    }
+
+    protected void validateDistance(BaseWorkout workout) {
+        assertEquals(driver.findElement(DISTANCE).getAttribute("value"), String.valueOf(workout.getDistance()));
+    }
+
+    protected void validatePaceType(BaseWorkout workout) {
+        assertEquals(getSelectedOption("PaceType"), workout.getPaceType());
+    }
+
+    protected void validatePace(BaseWorkout workout) {
+        assertEquals(driver.findElement(PACE).getAttribute("value"), workout.getPace());
+    }
+
+    protected void validateDuration(BaseWorkout workout) {
+        assertEquals(driver.findElement(DURATION).getAttribute("value"), workout.getDuration());
+    }
+
+    protected void validateFeel(BaseWorkout workout) {
+        driver.findElement(By.xpath(format(FEEL, workout.getFeel()))).isSelected();
+    }
+
+    protected void validatePerceivedEffort(BaseWorkout workout) {
+        assertEquals(getSelectedOption("PerEffort"), workout.getPerceivedEffort());
+    }
+
+    protected void validateMinHR(BaseWorkout workout) {
+        assertEquals(driver.findElement(MIN_HR).getAttribute("value"), String.valueOf(workout.getMinHR()));
+    }
+
+    protected void validateAvgHR(BaseWorkout workout) {
+        assertEquals(driver.findElement(AVG_HR).getAttribute("value"), String.valueOf(workout.getAvgHR()));
+    }
+
+    protected void validateMaxHR(BaseWorkout workout) {
+        assertEquals(driver.findElement(MAX_HR).getAttribute("value"), String.valueOf(workout.getMaxHR()));
+    }
+
+    protected void validateCaloriesBurned(BaseWorkout workout) {
+        assertEquals(driver.findElement(CALORIES_BURNED).getAttribute("value"), String.valueOf(workout.getCaloriesBurned()));
+    }
+
+    protected void validateAvgPower(BaseWorkout workout) {
+        assertEquals(driver.findElement(AVG_POWER).getAttribute("value"), String.valueOf(workout.getAvgPower()));
+    }
+
+    protected void validateMaxPower(BaseWorkout workout) {
+        assertEquals(driver.findElement(MAX_POWER).getAttribute("value"), String.valueOf(workout.getMaxPower()));
+    }
+
+    protected void validateAvgCadence(BaseWorkout workout) {
+        assertEquals(driver.findElement(AVG_CADENCE).getAttribute("value"), String.valueOf(workout.getAvgCadence()));
+    }
+
+    protected void validateMaxCadence(BaseWorkout workout) {
+        assertEquals(driver.findElement(MAX_CADENCE).getAttribute("value"), String.valueOf(workout.getMaxCadence()));
+    }
+
+    protected void validateElevationGainType(BaseWorkout workout) {
+        assertEquals(getSelectedOption("EGainDistType"), workout.getElevationGainType());
+    }
+
+    protected void validateElevationGain(BaseWorkout workout) {
+        String elevationGain = driver.findElement(ELEVATION_GAIN).getAttribute("value");
+        assertEquals(elevationGain.substring(0, elevationGain.indexOf(".")), valueOf(workout.getElevationGain()));
+    }
+
+    protected void validateElevationLossType(BaseWorkout workout) {
+        assertEquals(getSelectedOption("ELossDistType"), workout.getElevationLossType());
+    }
+
+    protected void validateElevationLoss(BaseWorkout workout) {
+        String elevationLoss = driver.findElement(ELEVATION_LOSS).getAttribute("value");
+        assertEquals(elevationLoss.substring(0, elevationLoss.indexOf(".")), valueOf(workout.getElevationLoss()));
+    }
+
+
+    protected void selectSubType(BaseWorkout workout) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(format(SUBTYPE, workout.getSubType()))));
         driver.findElement(By.xpath(format(SUBTYPE, workout.getSubType()))).click();
 
     }
 
-    public void fillAvgPower(BaseWorkout baseWorkout) {
-        driver.findElement(AVG_POWER).sendKeys(String.valueOf(baseWorkout.getAvgPower()));
+    protected void fillAvgPower(BaseWorkout baseWorkout) {
+        driver.findElement(AVG_POWER).clear();
+        driver.findElement(AVG_POWER).sendKeys(valueOf(baseWorkout.getAvgPower()));
 
     }
 
-    public void fillMaxPower(BaseWorkout baseWorkout) {
-        driver.findElement(MAX_POWER).sendKeys(String.valueOf(baseWorkout.getMaxPower()));
+    protected void fillMaxPower(BaseWorkout baseWorkout) {
+        driver.findElement(MAX_POWER).clear();
+        driver.findElement(MAX_POWER).sendKeys(valueOf(baseWorkout.getMaxPower()));
     }
 
-    public void fillAvgCadence(BaseWorkout baseWorkout) {
-        driver.findElement(AVG_CADENCE).sendKeys(String.valueOf(baseWorkout.getAvgCadence()));
+    protected void fillAvgCadence(BaseWorkout baseWorkout) {
+        driver.findElement(AVG_CADENCE).clear();
+        driver.findElement(AVG_CADENCE).sendKeys(valueOf(baseWorkout.getAvgCadence()));
     }
 
-    public void fillMaxCadence(BaseWorkout baseWorkout) {
-        driver.findElement(MAX_CADENCE).sendKeys(String.valueOf(baseWorkout.getMaxCadence()));
+    protected void fillMaxCadence(BaseWorkout baseWorkout) {
+        driver.findElement(MAX_CADENCE).clear();
+        driver.findElement(MAX_CADENCE).sendKeys(valueOf(baseWorkout.getMaxCadence()));
     }
 
-    public void fillElevationGain(BaseWorkout baseWorkout) {
-        driver.findElement(ELEVATION_GAIN).sendKeys(String.valueOf(baseWorkout.getElevationGain()));
+    protected void fillElevationGain(BaseWorkout baseWorkout) {
+        driver.findElement(ELEVATION_GAIN).clear();
+        driver.findElement(ELEVATION_GAIN).sendKeys(valueOf(baseWorkout.getElevationGain()));
     }
 
-    public void fillElevationGainType(BaseWorkout baseWorkout) {
+    protected void fillElevationGainType(BaseWorkout baseWorkout) {
         driver.findElement(ELEVATION_GAIN_TYPE).click();
         driver.findElement(By.xpath(format(SELECT_OPTION, "EGainDistType", baseWorkout.getElevationGainType()))).click();
     }
 
-    public void fillElevationLoss(BaseWorkout baseWorkout) {
-        driver.findElement(ELEVATION_LOSS).sendKeys(String.valueOf(baseWorkout.getElevationLoss()));
+    protected void fillElevationLoss(BaseWorkout baseWorkout) {
+        driver.findElement(ELEVATION_LOSS).clear();
+        driver.findElement(ELEVATION_LOSS).sendKeys(valueOf(baseWorkout.getElevationLoss()));
     }
 
-    public void fillElevationLossType(BaseWorkout baseWorkout) {
+    protected void fillElevationLossType(BaseWorkout baseWorkout) {
         driver.findElement(ELEVATION_LOSS_TYPE).click();
         driver.findElement(By.xpath(format(SELECT_OPTION, "ELossDistType", baseWorkout.getElevationLossType()))).click();
     }
 
-    public void fillDate(BaseWorkout baseWorkout) {
+    protected void fillDate(BaseWorkout baseWorkout) {
         driver.findElement(DATE).clear();
         driver.findElement(DATE).sendKeys(baseWorkout.getDate());
 
     }
 
-    public void fillTimeOfDay(BaseWorkout baseWorkout) {
+    protected void fillTimeOfDay(BaseWorkout baseWorkout) {
+        driver.findElement(TIME_OF_DAY).clear();
         driver.findElement(TIME_OF_DAY).sendKeys(baseWorkout.getTimeOfDay());
     }
 
-    public void fillWorkoutName(BaseWorkout baseWorkout) {
+    protected void fillWorkoutName(BaseWorkout baseWorkout) {
+        driver.findElement(WORKOUT_NAME).clear();
         driver.findElement(WORKOUT_NAME).sendKeys(baseWorkout.getWorkoutName());
     }
 
-    public void fillDescription(BaseWorkout baseWorkout) {
+    protected void fillDescription(BaseWorkout baseWorkout) {
+        driver.findElement(DESCRIPTION).clear();
         driver.findElement(DESCRIPTION).sendKeys(baseWorkout.getDescription());
     }
 
-    public void fillDuration(BaseWorkout baseWorkout) {
+    protected void fillDuration(BaseWorkout baseWorkout) {
+        driver.findElement(DURATION).clear();
         driver.findElement(DURATION).sendKeys(baseWorkout.getDuration());
     }
 
-    public void fillDistance(BaseWorkout baseWorkout) {
+    protected void fillDistance(BaseWorkout baseWorkout) {
+        driver.findElement(DISTANCE).clear();
         driver.findElement(DISTANCE).sendKeys(baseWorkout.getDistance() + "");
     }
 
-    public void fillDistanceType(BaseWorkout baseWorkout) {
+    protected void fillDistanceType(BaseWorkout baseWorkout) {
         driver.findElement(DISTANCE_TYPE).click();
         driver.findElement(By.xpath(format(SELECT_OPTION, "DistType", baseWorkout.getDistanceType()))).click();
     }
 
-    public void fillPaceType(BaseWorkout baseWorkout) {
+    protected void fillPaceType(BaseWorkout baseWorkout) {
         driver.findElement(PACE_TYPE).click();
         driver.findElement(By.xpath(format(SELECT_OPTION, "PaceType", baseWorkout.getPaceType()))).click();
+        driver.findElement(PACE).clear();
     }
 
-    public void fillPace(BaseWorkout baseWorkout) {
-
-        driver.findElement(PACE).clear();
+    protected void fillPace(BaseWorkout baseWorkout) {
         driver.findElement(PACE).sendKeys(baseWorkout.getPace());
     }
 
-    public void fillFeel(BaseWorkout baseWorkout) {
+    protected void fillFeel(BaseWorkout baseWorkout) {
         driver.findElement(By.xpath(format(FEEL, baseWorkout.getFeel()))).click();
     }
 
-    public void fillPerceivedEffort(BaseWorkout baseWorkout) {
+    protected void fillPerceivedEffort(BaseWorkout baseWorkout) {
         driver.findElement(PERCEIVED_EFFORT).click();
-        driver.findElement(By.xpath(format(SELECT_OPTION, "PerEffort", baseWorkout.getPerceivedEffort())));
+        driver.findElement(By.xpath(format(SELECT_OPTION, "PerEffort", baseWorkout.getPerceivedEffort()))).click();
     }
 
-    public void fillMinHR(BaseWorkout baseWorkout) {
-        String minHR = String.valueOf(baseWorkout.getMinHR());
+    protected void fillMinHR(BaseWorkout baseWorkout) {
+        driver.findElement(MIN_HR).clear();
+        String minHR = valueOf(baseWorkout.getMinHR());
         driver.findElement(MIN_HR).sendKeys(minHR);
     }
 
-    public void fillAvgHR(BaseWorkout baseWorkout) {
-        String avgHR = String.valueOf(baseWorkout.getAvgHR());
+    protected void fillAvgHR(BaseWorkout baseWorkout) {
+        driver.findElement(AVG_HR).clear();
+        String avgHR = valueOf(baseWorkout.getAvgHR());
         driver.findElement(AVG_HR).sendKeys(avgHR);
     }
 
-    public void fillMaxHR(BaseWorkout baseWorkout) {
-        String maxHR = String.valueOf(baseWorkout.getMaxHR());
+    protected void fillMaxHR(BaseWorkout baseWorkout) {
+        driver.findElement(MAX_HR).clear();
+        String maxHR = valueOf(baseWorkout.getMaxHR());
         driver.findElement(MAX_HR).sendKeys(maxHR);
     }
 
-    public void fillCaloriesBurned(BaseWorkout baseWorkout) {
-        String caloriesBurned = String.valueOf(baseWorkout.getCaloriesBurned());
+    protected void fillCaloriesBurned(BaseWorkout baseWorkout) {
+        driver.findElement(CALORIES_BURNED).clear();
+        String caloriesBurned = valueOf(baseWorkout.getCaloriesBurned());
         driver.findElement(CALORIES_BURNED).sendKeys(caloriesBurned);
     }
 
 
-    public void clickAddWorkout() {
+    protected void clickAddWorkout() {
         driver.findElement(SAVE_BUTTON).click();
     }
 
