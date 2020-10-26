@@ -1,5 +1,6 @@
 package pages;
 
+import models.workouts.BaseWorkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,12 +17,16 @@ public class CalendarPage extends BasePage {
     public static final String SELECT_OPTION_INTO_DROPDOWN = "//td[@data-day='%s']//a[contains(text(),'%s')]";
     public static final String SORT = "//div[@class='fc-header-left']//span[contains(@class,'%s')]"; //weeks,week,month
     public static final String WEEK_SORT = "//ul[@class='dropdown-menu']//a[contains(text(),'%s')]";
+    public static final By WORKOUT_TIME = By.cssSelector("#WorkoutTime");
 
 
     public CalendarPage(WebDriver driver) {
         super(driver);
     }
+public void quickAdd(BaseWorkout workout){
 
+
+}
     public void openCalendarMenuByDayAndSelectOptionInDropdown(String day, String option) {
         Actions actions = new Actions(driver);
         WebElement calendarPlus = driver.findElement(By.xpath(format(CALENDAR_PLUS, day)));

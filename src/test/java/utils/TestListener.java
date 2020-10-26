@@ -1,7 +1,6 @@
 package utils;
 
 import io.qameta.allure.Attachment;
-
 import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.NoSuchSessionException;
 import org.openqa.selenium.OutputType;
@@ -21,13 +20,13 @@ public class TestListener implements ITestListener {
     }
 
     public void onTestSuccess(ITestResult iTestResult) {
-       log.info(String.format("======================================== FINISHED TEST %s Duration: %ss ========================================%n", iTestResult.getName(),
+        log.info(String.format("======================================== FINISHED TEST %s Duration: %ss ========================================%n", iTestResult.getName(),
                 getExecutionTime(iTestResult)));
 
     }
 
     public void onTestFailure(ITestResult iTestResult) {
-       log.info(String.format("======================================= FAILED TEST %s Duration: %ss ========================================%n", iTestResult.getName(),
+        log.info(String.format("======================================= FAILED TEST %s Duration: %ss ========================================%n", iTestResult.getName(),
                 getExecutionTime(iTestResult)));
         takeScreenshot(iTestResult);
     }
@@ -43,7 +42,7 @@ public class TestListener implements ITestListener {
         ITestContext context = iTestResult.getTestContext();
 
         try {
-            if(context.getAttribute("driver") != null) {
+            if (context.getAttribute("driver") != null) {
                 return ((TakesScreenshot) context.getAttribute("driver")).getScreenshotAs(OutputType.BYTES);
             } else {
                 return new byte[]{};

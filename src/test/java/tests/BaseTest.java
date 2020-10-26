@@ -7,20 +7,21 @@ import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import pages.CalendarPage;
+import pages.WorkoutPage;
 import steps.LoginSteps;
 import steps.RegistrationSteps;
-import steps.WorkoutSteps;
 import utils.CapabilitiesGenerator;
 import utils.TestListener;
 
 import java.util.concurrent.TimeUnit;
+
 @Listeners(TestListener.class)
 public class BaseTest {
     WebDriver driver;
     LoginSteps loginSteps;
-    WorkoutSteps workoutSteps;
     RegistrationSteps registrationSteps;
     CalendarPage calendarPage;
+    WorkoutPage workoutPage;
 
     @BeforeMethod
     public void setUp(ITestContext context) {
@@ -28,19 +29,19 @@ public class BaseTest {
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
-
         loginSteps = new LoginSteps(driver);
-        workoutSteps = new WorkoutSteps(driver);
         registrationSteps = new RegistrationSteps(driver);
         context.setAttribute("driver", driver);
         calendarPage = new CalendarPage(driver);
         loginSteps.openPage();
+        workoutPage = new WorkoutPage(driver);
 
     }
 
     @AfterMethod(alwaysRun = true)
     public void closeBrowser() {
-        if(driver != null) {
+
+        if (driver != null) {
             driver.quit();
         }
 
