@@ -1,5 +1,6 @@
 package pages;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import models.workouts.BaseWorkout;
 import models.workouts.CreateAndValidateBaseWorkout;
 import org.openqa.selenium.By;
@@ -13,10 +14,11 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
         super(driver);
     }
 
-    private static final By UPDATE_WORKOUT = By.cssSelector(".dropdown-toggle");
+    private static final By TO_UPDATE_WORKOUT = By.cssSelector(".dropdown-toggle");
+    private static final By ADD_WORKOUT_BUTTON = By.cssSelector("#saveButton");
+    private static final By UPDATE_WORKOUT_BUTTON = By.cssSelector("[name='btnSubmit']");
 
-
-    public WorkoutPage createWorkout(String workoutType, BaseWorkout workout) {
+    public WorkoutPage fillWorkout(String workoutType, BaseWorkout workout) {
         Map<String, String> workoutsDropDown = new HashMap<>();
         workoutsDropDown.put("Run", "run");
         workoutsDropDown.put("Bike", "bike");
@@ -53,14 +55,8 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
             }
             if (workout.getElevationGainType() != null) {
                 fillElevationGainType(workout);
-            }
-            if (workout.getElevationGain() != 0) {
                 fillElevationGain(workout);
-            }
-            if (workout.getElevationLossType() != null) {
                 fillElevationLossType(workout);
-            }
-            if (workout.getElevationLoss() != 0) {
                 fillElevationLoss(workout);
             }
             if (workout.getFeel() != null) {
@@ -71,26 +67,14 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
             }
             if (workout.getAvgPower() != 0) {
                 fillAvgPower(workout);
-            }
-            if (workout.getMaxPower() != 0) {
                 fillMaxPower(workout);
-            }
-            if (workout.getAvgCadence() != 0) {
                 fillAvgCadence(workout);
-            }
-            if (workout.getMaxCadence() != 0) {
                 fillMaxCadence(workout);
             }
             if (workout.getMinHR() != 0) {
                 fillMinHR(workout);
-            }
-            if (workout.getMaxHR() != 0) {
                 fillMaxHR(workout);
-            }
-            if (workout.getAvgHR() != 0) {
                 fillAvgHR(workout);
-            }
-            if (workout.getCaloriesBurned() != 0) {
                 fillCaloriesBurned(workout);
             }
         } else if (workoutType.equals("Strength Training")) {
@@ -99,14 +83,11 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
             createCrossTraining(workout);
         }
 
-
-        clickAddWorkout();
-
         return this;
     }
 
     public void validateWorkout(String workoutType, BaseWorkout workout) {
-        clickUpdateWorkout();
+        toUpdateWorkout();
 
         if (!workoutType.equals("Cross Training") & !workoutType.equals("Strength Training")) {
             validateDate(workout);
@@ -142,38 +123,20 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
             }
             if (workout.getMinHR() != 0) {
                 validateMinHR(workout);
-            }
-            if (workout.getAvgHR() != 0) {
                 validateAvgHR(workout);
-            }
-            if (workout.getMaxHR() != 0) {
                 validateMaxHR(workout);
-            }
-            if (workout.getCaloriesBurned() != 0) {
                 validateCaloriesBurned(workout);
             }
             if (workout.getAvgPower() != 0) {
                 validateAvgPower(workout);
-            }
-            if (workout.getMaxPower() != 0) {
                 validateMaxPower(workout);
-            }
-            if (workout.getMaxCadence() != 0) {
                 validateMaxCadence(workout);
-            }
-            if (workout.getAvgCadence() != 0) {
                 validateAvgCadence(workout);
             }
             if (workout.getElevationGainType() != null) {
                 validateElevationGainType(workout);
-            }
-            if (workout.getElevationGain() != 0) {
                 validateElevationGain(workout);
-            }
-            if (workout.getElevationLossType() != null) {
                 validateElevationLossType(workout);
-            }
-            if (workout.getElevationLoss() != 0) {
                 validateElevationLoss(workout);
             }
         } else if (workoutType.equals("Strength Training")) {
@@ -184,9 +147,35 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
     }
 
 
-    public WorkoutPage clickUpdateWorkout() {
-        driver.findElement(UPDATE_WORKOUT).click();
+    public WorkoutPage toUpdateWorkout() {
+        driver.findElement(TO_UPDATE_WORKOUT).click();
         return this;
+    }
+    public WorkoutPage updateWorkoutTo(String type,BaseWorkout workout){
+        fillWorkout(type,workout);
+        return this;
+    }
+    public WorkoutPage clickUpdateWorkout(){
+        driver.findElement(UPDATE_WORKOUT_BUTTON).click();
+        return this;
+    }
+    public WorkoutPage clickAddWorkout() {
+        driver.findElement(ADD_WORKOUT_BUTTON).click();
+        return this;
+    }
+    public void quickAddWorkout(BaseWorkout workout){
+       fillDefaults(workout);
+       fillTimeOfDay(workout);
+       fillActivityTypeByIndex(workout);
+       fillDistanceType(workout);
+       fillDistance(workout);
+       fillDuration(workout);
+       fillPaceType(workout);
+       fillHowIFelt(workout);
+       fillPerceivedEffort(workout);
+       fillPostWorkout(workout);
+       clickAddWorkout();
+
     }
 
 }

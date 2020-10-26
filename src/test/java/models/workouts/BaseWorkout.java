@@ -14,9 +14,11 @@ public class BaseWorkout  {
     int distance;
     String distanceType;
     String duration;
+    int activityType;
     String pace;
     String paceType;
     String feel;
+    String postWorkout;
     String perceivedEffort;
     int elevationGain;
     String elevationGainType;
@@ -30,6 +32,7 @@ public class BaseWorkout  {
     int maxPower;
     int avgCadence;
     int maxCadence;
+
 
 
 

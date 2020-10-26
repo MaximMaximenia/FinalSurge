@@ -34,26 +34,32 @@ public class WorkoutTest extends BaseTest {
     }
 
     @Test(dataProvider = "Workouts")
-    public void addWorkoutAndValidate(String type, BaseWorkout workout) {
+    public void addWorkoutAndValidateTest(String type, BaseWorkout workout) {
         loginSteps
                 .login("masya@mail.ru", "1234321MAks__", false)
                 .toWorkoutPage();
         workoutPage
-                .createWorkout(type, workout)
+                .fillWorkout(type, workout)
+                .clickAddWorkout()
                 .validateWorkout(type, workout);
     }
 
 
     @Test
-    public void UpdateWorkout() {
+    public void updateWorkoutTest() {
 
 
         loginSteps
                 .login("masya@mail.ru", "1234321MAks__", false)
                 .toWorkoutPage();
         workoutPage
-                .createWorkout("Swim", swim)
-                .clickUpdateWorkout();
+                .fillWorkout("Swim", swim)
+                .clickAddWorkout()
+                .toUpdateWorkout()
+                .updateWorkoutTo("Run", run)
+                .clickUpdateWorkout()
+                .validateWorkout("Run", run);
+
     }
 }
 

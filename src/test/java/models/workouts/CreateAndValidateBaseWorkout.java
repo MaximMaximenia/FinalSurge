@@ -3,7 +3,9 @@ package models.workouts;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
 import pages.BasePage;
+import pages.WorkoutPage;
 
 import static java.lang.String.format;
 import static java.lang.String.valueOf;
@@ -22,7 +24,6 @@ public class CreateAndValidateBaseWorkout extends BasePage {
     private static final By DISTANCE_TYPE = By.cssSelector("#DistType");
     private static final By PACE = By.cssSelector("#Pace");
     private static final By PACE_TYPE = By.cssSelector("#PaceType");
-    private static final By SAVE_BUTTON = By.cssSelector("#saveButton");
     private static final String SELECT_OPTION = "//select[@id='%s']//option[text()='%s']";
     private static final By PERCEIVED_EFFORT = By.cssSelector("#PerEffort");
     private static final By MIN_HR = By.cssSelector("#MinHR");
@@ -34,11 +35,14 @@ public class CreateAndValidateBaseWorkout extends BasePage {
     private static final By MAX_POWER = By.cssSelector("#PowMax");
     private static final By AVG_CADENCE = By.cssSelector("#CadAvg");
     private static final By MAX_CADENCE = By.cssSelector("#CadMax");
+    private static final By POST_WORKOUT = By.cssSelector("#PostDesc");
     private static final By ELEVATION_GAIN = By.cssSelector("#EGain");
     private static final By ELEVATION_GAIN_TYPE = By.cssSelector("#EGainDistType");
     private static final By ELEVATION_LOSS = By.cssSelector("#ELoss");
     private static final By VALIDATE_SUBTYPE = By.cssSelector(".subtypeselector.active");
     private static final By ELEVATION_LOSS_TYPE = By.cssSelector("#ELossDistType");
+    private static final By ACTIVITY_TYPE = By.cssSelector("#ActivityType");
+    private static final By HOW_I_FELT = By.cssSelector("#HowFeel");
     private static final String DROP_DOWN = "[data-code='%s']";
     //Cross and Strength Training Locators
     private static final By DISTANCE_TYPE_NO_INT = By.cssSelector("#DistTypeNoInt");
@@ -237,6 +241,12 @@ public class CreateAndValidateBaseWorkout extends BasePage {
         fillWorkoutName(workout);
         fillDescription(workout);
     }
+    protected void fillActivityTypeByIndex(BaseWorkout workout) {
+        Select select = new Select(driver.findElement(ACTIVITY_TYPE));
+        select.selectByIndex(workout.getActivityType());
+
+    }
+
 
     protected void fillMaxCadence(BaseWorkout baseWorkout) {
         driver.findElement(MAX_CADENCE).clear();
@@ -305,10 +315,19 @@ public class CreateAndValidateBaseWorkout extends BasePage {
         driver.findElement(By.xpath(format(SELECT_OPTION, "PaceType", baseWorkout.getPaceType()))).click();
 
     }
+    protected void fillHowIFelt(BaseWorkout baseWorkout) {
+        driver.findElement(HOW_I_FELT).click();
+        driver.findElement(By.xpath(format(SELECT_OPTION, "HowFeel", baseWorkout.getFeel()))).click();
+
+    }
 
     protected void fillPace(BaseWorkout baseWorkout) {
         driver.findElement(PACE).clear();
         driver.findElement(PACE).sendKeys(baseWorkout.getPace());
+    }
+    protected void fillPostWorkout(BaseWorkout baseWorkout) {
+        driver.findElement(POST_WORKOUT).clear();
+        driver.findElement(POST_WORKOUT).sendKeys(baseWorkout.getPostWorkout());
     }
 
     protected void fillFeel(BaseWorkout baseWorkout) {
@@ -342,11 +361,6 @@ public class CreateAndValidateBaseWorkout extends BasePage {
         driver.findElement(CALORIES_BURNED).clear();
         String caloriesBurned = valueOf(baseWorkout.getCaloriesBurned());
         driver.findElement(CALORIES_BURNED).sendKeys(caloriesBurned);
-    }
-
-
-    protected void clickAddWorkout() {
-        driver.findElement(SAVE_BUTTON).click();
     }
 
 
