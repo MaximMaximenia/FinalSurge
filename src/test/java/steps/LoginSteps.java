@@ -17,6 +17,7 @@ public class LoginSteps extends BaseSteps {
 
     public LoginSteps login(String email, String password, boolean rememberMe) {
         loginPage
+                .openPage()
                 .fillLoginFields(email, password, rememberMe)
                 .clickLogin();
         return this;
@@ -31,6 +32,7 @@ public class LoginSteps extends BaseSteps {
         loginPage.toRegisterPage();
         return new RegistrationSteps(driver);
     }
+
 
     public void errorMessageShouldBe(String error) {
         assertEquals(loginPage.getErrorMessage(), error);

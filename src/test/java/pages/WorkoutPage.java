@@ -1,13 +1,16 @@
 package pages;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import models.workouts.BaseWorkout;
 import models.workouts.CreateAndValidateBaseWorkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+
+import static org.testng.Assert.assertEquals;
 
 public class WorkoutPage extends CreateAndValidateBaseWorkout {
     public WorkoutPage(WebDriver driver) {
@@ -17,6 +20,8 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
     private static final By TO_UPDATE_WORKOUT = By.cssSelector(".dropdown-toggle");
     private static final By ADD_WORKOUT_BUTTON = By.cssSelector("#saveButton");
     private static final By UPDATE_WORKOUT_BUTTON = By.cssSelector("[name='btnSubmit']");
+    private static final By ALL_WORKOUTS = By.xpath("//td[contains(@class,'fc-widget-content')]//div[@class='fc-event-activity-title']");
+
 
     public WorkoutPage fillWorkout(String workoutType, BaseWorkout workout) {
         Map<String, String> workoutsDropDown = new HashMap<>();
@@ -86,14 +91,12 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
         return this;
     }
 
-    public void validateWorkout(String workoutType, BaseWorkout workout) {
+
+    public WorkoutPage validateWorkout(String workoutType, BaseWorkout workout) {
         toUpdateWorkout();
 
         if (!workoutType.equals("Cross Training") & !workoutType.equals("Strength Training")) {
-            validateDate(workout);
-            validateWorkoutName(workout);
-            validateWorkoutDescription(workout);
-
+            validateDefaults(workout);
             if (workout.getTimeOfDay() != null) {
                 validateTimeOfDay(workout);
             }
@@ -144,6 +147,7 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
         } else {
             validateCrossTraining(workout);
         }
+        return this;
     }
 
 
@@ -151,31 +155,35 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
         driver.findElement(TO_UPDATE_WORKOUT).click();
         return this;
     }
-    public WorkoutPage updateWorkoutTo(String type,BaseWorkout workout){
-        fillWorkout(type,workout);
+
+    public WorkoutPage updateWorkoutTo(String type, BaseWorkout workout) {
+        fillWorkout(type, workout);
         return this;
     }
-    public WorkoutPage clickUpdateWorkout(){
+
+    public WorkoutPage clickUpdateWorkout() {
         driver.findElement(UPDATE_WORKOUT_BUTTON).click();
         return this;
     }
+
     public WorkoutPage clickAddWorkout() {
         driver.findElement(ADD_WORKOUT_BUTTON).click();
         return this;
     }
-    public void quickAddWorkout(BaseWorkout workout){
-       fillDefaults(workout);
-       fillTimeOfDay(workout);
-       fillActivityTypeByIndex(workout);
-       fillDistanceType(workout);
-       fillDistance(workout);
-       fillDuration(workout);
-       fillPaceType(workout);
-       fillHowIFelt(workout);
-       fillPerceivedEffort(workout);
-       fillPostWorkout(workout);
-       clickAddWorkout();
 
+    public WorkoutPage quickAddWorkout(BaseWorkout workout) {
+        fillDefaults(workout);
+        fillTimeOfDay(workout);
+        fillActivityTypeByIndex(workout);
+        fillDistanceType(workout);
+        fillDistance(workout);
+        fillDuration(workout);
+        fillPaceType(workout);
+        fillHowIFelt(workout);
+        fillPerceivedEffort(workout);
+        fillPostWorkout(workout);
+        clickAddWorkout();
+        return this;
     }
 
 }

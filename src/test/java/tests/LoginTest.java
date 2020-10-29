@@ -9,7 +9,6 @@ public class LoginTest extends BaseTest {
     public void login() {
 
         loginSteps
-                .openPage()
                 .login("masya@mail.ru", "1234321MAks__", false)
                 .validateLogin();
 
@@ -38,6 +37,14 @@ public class LoginTest extends BaseTest {
         loginSteps
                 .login("masya@mail.rus", "1234321MAks__", false)
                 .errorMessageShouldBe("Invalid login credentials. Please try again.");
+
+    }
+
+    @Test
+    public void logoutTest() {
+        loginSteps
+                .login("masya@mail.ru", "1234321MAks__", false)
+                .logOut();
 
     }
 }

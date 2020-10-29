@@ -19,8 +19,9 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public void openPage() {
+    public LoginPage openPage() {
         driver.get(BASE_URL);
+        return this;
     }
 
     public String isPageOpened() {
