@@ -124,7 +124,7 @@ public class DailyVitalsPage extends BasePage {
     }
     @Step("Create daily vitals")
     public DailyVitalsPage createDailyVitals(DailyVitals dailyVitals) {
-        //fillInputs
+        //fillInputs -
         fillStringInput(VITALS_DATE, dailyVitals.getDate());
         fillIntInput(STEPS, dailyVitals.getSteps());
         fillIntInput(CALORIES_BURNED, dailyVitals.getCaloriesConsumed());
