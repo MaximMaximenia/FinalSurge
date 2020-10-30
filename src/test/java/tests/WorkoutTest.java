@@ -1,6 +1,7 @@
 package tests;
 
 
+import io.qameta.allure.Description;
 import models.workouts.BaseWorkout;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -33,7 +34,7 @@ public class WorkoutTest extends BaseTest {
                 {"Transition", transition}
         };
     }
-
+    @Description("Add workout and validate")
     @Test(dataProvider = "Workouts")
     public void addWorkoutAndValidateTest(String type, BaseWorkout workout) {
         loginSteps
@@ -49,7 +50,7 @@ public class WorkoutTest extends BaseTest {
 
     }
 
-
+    @Description("Update workout test")
     @Test
     public void updateWorkoutTest() {
 

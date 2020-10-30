@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -23,11 +24,11 @@ public class PrintFrame extends BasePage {
     private static final By ONE_WORKOUT = By.cssSelector(".formSep");
     private static final By PRINT_ERROR = By.cssSelector(".alert-error");
     private static final String VALIDATE_PRINT_DATES = "//span[contains(text(),'Workouts: %s - %s')]";
-
+    @Step("Switch to print frame")
     private void switchToFrame() {
         driver.switchTo().frame(driver.findElement(PRINT_FRAME));
     }
-
+    @Step("Check print error")
     public void printErrorShouldBe(String error) {
         assertEquals(driver.findElement(PRINT_ERROR).getText(), error);
     }
@@ -41,27 +42,27 @@ public class PrintFrame extends BasePage {
         }
         return this;
     }
-
+    @Step("Click print button")
     public PrintFrame clickPrintButton() {
         driver.findElement(PRINT_BUTTON).click();
         driver.switchTo().defaultContent();
         driver.findElement(By.cssSelector("body")).sendKeys(Keys.CONTROL + "2");
         return this;
     }
-
+    @Step("Check amount workouts expected:{expectedAmount}")
     public void amountWorkoutsShouldBe(int expectedAmount) {
 
         List<WebElement> allWorkouts = driver.findElements(ONE_WORKOUT);
         assertEquals(allWorkouts.size()-1,expectedAmount);
     }
-
+    @Step("Switch to last tab")
     public PrintFrame switchToLastPage() {
         for (String handle1 : driver.getWindowHandles()) {
             driver.switchTo().window(handle1);
         }
         return this;
     }
-
+    @Step("Check print date: {startDate}-{endDate},url: {expectedURL}")
     public void validatePrintDateAndURL(String startDate, String endDate, String expectedURL) {
 
         driver.findElement(By.xpath(format(VALIDATE_PRINT_DATES, startDate, endDate)));

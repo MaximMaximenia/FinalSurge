@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Description;
 import models.Account;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -33,7 +34,7 @@ public class RegisterTest extends BaseTest {
                 {"1234321LAsa_-", "VERY STRONG"},
         };
     }
-
+    @Description("Check register errors")
     @Test(dataProvider = "Errors")
     public void checkErrors(Account account, String error) {
         loginSteps
@@ -43,7 +44,7 @@ public class RegisterTest extends BaseTest {
                 .registration(account)
                 .errorMessageShouldBe(error);
     }
-
+    @Description("Check password complexity field ")
     @Test(dataProvider = "Password Complexity")
     public void checkPasswordComplexity(String password, String complexity) {
         loginSteps
@@ -53,7 +54,7 @@ public class RegisterTest extends BaseTest {
                 .passwordComplexityShouldBe(password, complexity);
 
     }
-
+    @Description("Registration test")
     @Test
     public void registrationTest() {
 
@@ -65,15 +66,16 @@ public class RegisterTest extends BaseTest {
                 .registration(defaultUser)
                 .validateRegistration();
     }
-
+    @Description("Check messages under empty fields")
     @Test
     public void checkingThatMessagesAppearUnderEmptyInputs() {
         loginSteps
                 .openPage()
                 .toRegistration();
+        registerPage
+                .clickCreateAccount();
         registrationSteps
-                .registration(emptyUser)
-                .amountAppearedMessagesShouldBe(6);
+                .amountAppearedMessagesShouldBe(5);
     }
 
 }

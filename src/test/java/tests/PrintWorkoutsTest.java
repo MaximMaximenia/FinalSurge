@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Description;
 import models.workouts.BaseWorkout;
 import org.testng.annotations.Test;
 
@@ -8,7 +9,7 @@ public class PrintWorkoutsTest extends BaseTest {
     String endDate = "10/12/2020";
     BaseWorkout swim = BaseWorkout.builder().subType("Drills").date("10/11/2020").timeOfDay("05:45 AM").workoutName("SwimWorkout").description("went to the pools").distanceType("m").distance(15).duration("25:00").paceType("kph").feel("Poor").perceivedEffort("3 (Light)").caloriesBurned(1232).build();
     BaseWorkout swim2 = BaseWorkout.builder().subType("Drills").date("10/11/2020").timeOfDay("06:45 AM").workoutName("SwimWorkout").description("went to the pools").distanceType("m").distance(15).duration("25:00").paceType("kph").feel("Poor").perceivedEffort("3 (Light)").caloriesBurned(1232).build();
-
+    @Description("Print workout test")
     @Test
     public void printWorkoutTest() {
         loginSteps
@@ -20,12 +21,13 @@ public class PrintWorkoutsTest extends BaseTest {
                 .openPrintFrame()
                 .fillFrame(startDate, endDate, true)
                 .clickPrintButton()
+                .switchToLastPage()
                 .validatePrintDateAndURL(startDate, endDate, "https://log.finalsurge.com/PrintWorkouts.cshtml");
         calendarSteps
                 .deleteFromTo(startDate, endDate);
 
     }
-
+    @Description("Print some workout test")
     @Test
     public void printSomeWorkoutTest() {
         loginSteps
@@ -48,6 +50,7 @@ public class PrintWorkoutsTest extends BaseTest {
                 .deleteFromTo(startDate, endDate);
 
     }
+    @Description("Check print error")
     @Test
     public void checkPrintError() {
         loginSteps

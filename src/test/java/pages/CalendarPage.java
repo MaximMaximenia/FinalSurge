@@ -1,5 +1,7 @@
 package pages;
 
+import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -10,9 +12,8 @@ import java.util.List;
 
 import static java.lang.String.format;
 import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertTrue;
 
-
+@Log4j2
 public class CalendarPage extends BasePage {
 
 
@@ -30,19 +31,20 @@ public class CalendarPage extends BasePage {
         super(driver);
     }
 
-    public void monthShouldBe(String month) {
-        assertTrue(driver.findElement(MONTH_AND_YEAR).getText().contains(month));
-    }
 
-    public void toNextMonth(int amountClick) {
-        for (int i = 0; i < amountClick; i++) {
+    @Step("Select month: {month}")
+    public CalendarPage selectMonth(String month) {
+        log.info("Select month: " + month);
+        while (!driver.findElement(MONTH_AND_YEAR).getText().contains(month)) {
             wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(NEXT_MONTH_BUTTON)));
             driver.findElement(NEXT_MONTH_BUTTON).click();
         }
-
+        return this;
     }
 
+    @Step("Open calendar menu by day:{day}, and select option {option}")
     public void openCalendarMenuByDayAndSelectOptionInDropdown(int day, String option) {
+        log.info("Open calendar menu by day: " + day + ", and select option: " + option + "");
         Actions actions = new Actions(driver);
         WebElement calendarPlus = driver.findElement(By.xpath(format(CALENDAR_PLUS, day)));
         actions.moveToElement(calendarPlus).perform();
@@ -51,11 +53,14 @@ public class CalendarPage extends BasePage {
     }
 
     public void selectSortWeeksAmount(String weeksSort) {
+
         driver.findElement(By.xpath(format(SORT, "weeks"))).click();
         driver.findElement(By.xpath(format(WEEK_SORT, weeksSort)));
     }
 
+    @Step("Select sort by: {sortType}")
     public void selectSortBy(String sortType) {
+        log.info("Select sort by: "+sortType);
         if (sortType.contains("weeks")) {
             selectSortWeeksAmount(sortType);
         }
@@ -64,7 +69,9 @@ public class CalendarPage extends BasePage {
 
     }
 
+    @Step("Check amount created workouts. Expected: {expectedNumberOfWorkouts}")
     public void amountWorkoutsShouldBe(int expectedNumberOfWorkouts) {
+        log.info("Check that amount workout = "+expectedNumberOfWorkouts);
         openCalendarPage();
         List<WebElement> allWorkout = driver.findElements(ALL_WORKOUTS);
         assertEquals(allWorkout.size(), expectedNumberOfWorkouts);

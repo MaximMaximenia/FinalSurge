@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Description;
 import models.DailyVitals;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -24,7 +25,7 @@ public class DailyVitalsTest extends BaseTest {
                 {"This Year", 366},
         };
     }
-
+    @Description("Test daily vitals sort ")
     @Test(dataProvider = "Sort")
     public void sortTest(String sort, int expectedAmountDays) {
         loginSteps
@@ -35,7 +36,7 @@ public class DailyVitalsTest extends BaseTest {
                 .amountDaysAfterSortShouldBe(expectedAmountDays);
 
     }
-
+    @Description("Create and delete daily vitals")
     @Test
     public void createAndDeleteDailyVitals() {
         loginSteps
@@ -49,6 +50,7 @@ public class DailyVitalsTest extends BaseTest {
                 .confirmDelete()
                 .validateDelete(dailyVitals.getDate());
     }
+    @Description("Update and delete daily vitals")
     @Test
     public void UpdateAndDeleteDailyVitals() {
         loginSteps

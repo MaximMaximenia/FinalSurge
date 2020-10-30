@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 
@@ -19,32 +20,31 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    @Step("Open login page")
     public LoginPage openPage() {
         driver.get(BASE_URL);
         return this;
     }
 
-    public String isPageOpened() {
-        return driver.getCurrentUrl();
-    }
-
-
+    @Step("Get error message")
     public String getErrorMessage() {
         return driver.findElement(ERROR_MESSAGE).getText();
     }
 
+    @Step("Check that message under empty fields appear")
     public void checkThatMessageAppear() {
         driver.findElement(EMPTY_FIELD_MESSAGE).isDisplayed();
     }
 
-    public RegisterPage toRegisterPage() {
+    @Step("Open register page")
+    public void toRegisterPage() {
 
         driver.findElement(REGISTER_PAGE).click();
 
-        return new RegisterPage(driver);
+        new RegisterPage(driver);
     }
 
-
+    @Step("Fill login fields: email:{email},password:{password}")
     public LoginPage fillLoginFields(String email, String password, boolean rememberMe) {
         driver.findElement(EMAIL_INPUT).sendKeys(email);
         driver.findElement(PASSWORD_INPUT).sendKeys(password);
@@ -54,15 +54,9 @@ public class LoginPage extends BasePage {
         driver.findElement(LOGIN_BUTTON).click();
         return this;
     }
-
-    public LoginPage clickLogin() {
+    @Step("Click login button")
+    public void clickLogin() {
         driver.findElement(LOGIN_BUTTON).click();
-        return this;
     }
-
-    public String validateLogin() {
-        return driver.getCurrentUrl();
-    }
-
 
 }

@@ -1,10 +1,11 @@
 package tests;
 
+import io.qameta.allure.Description;
 import org.testng.annotations.Test;
 import utils.Retry;
 
 public class LoginTest extends BaseTest {
-
+    @Description("Login test")
     @Test(retryAnalyzer = Retry.class)
     public void login() {
 
@@ -14,6 +15,7 @@ public class LoginTest extends BaseTest {
 
     }
 
+    @Description("Check messages under empty email field ")
     @Test(retryAnalyzer = Retry.class)
     public void checkEmptyEmailMessage() {
 
@@ -22,6 +24,7 @@ public class LoginTest extends BaseTest {
                 .checkThatMessageUnderInputAppear();
     }
 
+    @Description("Check messages under empty password field ")
     @Test(retryAnalyzer = Retry.class)
     public void checkEmptyPasswordMessage() {
 
@@ -31,6 +34,7 @@ public class LoginTest extends BaseTest {
 
     }
 
+    @Description("Check non existent user error ")
     @Test(retryAnalyzer = Retry.class)
     public void nonExistentUserError() {
 
@@ -40,6 +44,7 @@ public class LoginTest extends BaseTest {
 
     }
 
+    @Description("Logout test")
     @Test
     public void logoutTest() {
         loginSteps

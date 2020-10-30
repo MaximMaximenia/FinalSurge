@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import models.DailyVitals;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -53,36 +54,43 @@ public class DailyVitalsPage extends BasePage {
         select.selectByVisibleText(option);
     }
 
+    @Step("Select sort by: {sort}")
     public DailyVitalsPage sortBy(String sort) {
         selectOption(SORT, sort);
         return this;
     }
 
+    @Step("Fill input: {input}")
     private void fillStringInput(By input, String str) {
         driver.findElement(input).clear();
         driver.findElement(input).sendKeys(str);
     }
 
+    @Step("Fill input: {input}")
     private void fillIntInput(By input, int number) {
         driver.findElement(input).clear();
         driver.findElement(input).sendKeys(valueOf(number));
     }
 
+    @Step("Check amount day after sort, expected: {amount}")
     public void amountDaysAfterSortShouldBe(int amount) {
         List<WebElement> allDays = driver.findElements(ALL_DAYS);
         assertEquals(allDays.size(), amount);
     }
 
+    @Step("Add vitals ")
     public DailyVitalsPage clickAddVitals() {
         driver.findElement(OPEN_ADD_VITALS_BUTTON).click();
         return this;
     }
 
+    @Step("Click add vitals button")
     private DailyVitalsPage addVitals() {
         driver.findElement(ADD_VITALS_BUTTON).click();
         return this;
     }
 
+    @Step("Validate delete by date: {date}")
     public void validateDelete(String date) {
         List<WebElement> allTableFields = driver.findElements(By.xpath(format(VALIDATE_DELETE, date)));
         for (int i = 1; i < allTableFields.size(); i++) {
@@ -92,26 +100,29 @@ public class DailyVitalsPage extends BasePage {
 
     }
 
+    @Step("Confirm Delete")
     public DailyVitalsPage confirmDelete() {
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(CONFIRM_DELETE)));
         driver.findElement(CONFIRM_DELETE).click();
         return this;
     }
 
+    @Step("Delete daily vitals by date: {date}")
     public DailyVitalsPage deleteDailyVitalsByDate(String date) {
         driver.findElement(By.xpath(format(DATE, date))).click();
         driver.findElement(DELETE_BUTTON).click();
         return this;
     }
 
+    @Step("Validate input: {input}")
     private void validateInput(By input, String expectedText) {
         assertEquals(driver.findElement(input).getAttribute("value"), expectedText);
     }
-
+    @Step("Validate select by id: {selectID}")
     private void validateSelect(String selectID, String option) {
         assertEquals(driver.findElement(By.xpath(format(VALIDATE_SELECT, selectID))).getText(), option);
     }
-
+    @Step("Create daily vitals")
     public DailyVitalsPage createDailyVitals(DailyVitals dailyVitals) {
         //fillInputs
         fillStringInput(VITALS_DATE, dailyVitals.getDate());
@@ -137,13 +148,13 @@ public class DailyVitalsPage extends BasePage {
         addVitals();
         return this;
     }
-
+    @Step("Update daily vitals")
     public DailyVitalsPage updateDailyVitalsByDate(String date, DailyVitals dailyVitals) {
         driver.findElement(By.xpath(format(DATE, date))).click();
         createDailyVitals(dailyVitals);
         return this;
     }
-
+    @Step("Validate daily vitals")
     public DailyVitalsPage validateDailyVitals(DailyVitals dailyVitals) {
         driver.findElement(By.xpath(format(DATE, dailyVitals.getDate()))).click();
         //validateInputs

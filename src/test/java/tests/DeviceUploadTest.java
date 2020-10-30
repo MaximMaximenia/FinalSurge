@@ -1,5 +1,6 @@
 package tests;
 
+import io.qameta.allure.Description;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
@@ -24,7 +25,7 @@ public class DeviceUploadTest extends BaseTest {
                 {"UACF", "https://www.mapmyfitness.com/"}
         };
     }
-
+    @Description("Check text about company")
     @Test(dataProvider = "Text About Company")
     public void checkTextAboutCompany(String companyName, String textAboutCompany) {
         loginSteps
@@ -34,7 +35,7 @@ public class DeviceUploadTest extends BaseTest {
                 .clickButtonByCompanyName(companyName)
                 .textAboutCompanyShouldBe(textAboutCompany);
     }
-
+    @Description("Check company link")
     @Test(dataProvider = "Company Links")
     public void checkCompanyLink(String companyName, String companyURL) {
 

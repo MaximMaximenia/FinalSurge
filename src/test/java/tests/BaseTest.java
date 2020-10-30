@@ -8,6 +8,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import pages.*;
 import steps.CalendarSteps;
+import steps.GearAndRoutesSteps;
 import steps.LoginSteps;
 import steps.RegistrationSteps;
 import utils.CapabilitiesGenerator;
@@ -18,14 +19,20 @@ import java.util.concurrent.TimeUnit;
 @Listeners(TestListener.class)
 public class BaseTest {
     WebDriver driver;
-    LoginSteps loginSteps;
-    RegistrationSteps registrationSteps;
+    //PAGES
     CalendarPage calendarPage;
     WorkoutPage workoutPage;
-    CopyMoveDeleteFrame copyMoveDeleteFrame;
-    CalendarSteps calendarSteps;
     DailyVitalsPage dailyVitalsPage;
     DeviceUploadPage deviceUploadPage;
+    WorkoutReportPage workoutReportPage;
+    RegisterPage registerPage;
+    //STEPS
+    GearAndRoutesSteps gearAndRoutesSteps;
+    LoginSteps loginSteps;
+    RegistrationSteps registrationSteps;
+    CalendarSteps calendarSteps;
+    //FRAMES
+    CopyMoveDeleteFrame copyMoveDeleteFrame;
     PrintFrame printFrame;
 
     @BeforeMethod
@@ -35,11 +42,14 @@ public class BaseTest {
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
         //PAGES
+        workoutReportPage = new WorkoutReportPage(driver);
         calendarPage = new CalendarPage(driver);
         workoutPage = new WorkoutPage(driver);
         dailyVitalsPage = new DailyVitalsPage(driver);
         deviceUploadPage = new DeviceUploadPage(driver);
+        registerPage = new RegisterPage(driver);
         //STEPS
+        gearAndRoutesSteps = new GearAndRoutesSteps(driver);
         calendarSteps = new CalendarSteps(driver);
         loginSteps = new LoginSteps(driver);
         registrationSteps = new RegistrationSteps(driver);

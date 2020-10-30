@@ -1,16 +1,13 @@
 package pages;
 
+import io.qameta.allure.Step;
 import models.workouts.BaseWorkout;
 import models.workouts.CreateAndValidateBaseWorkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import static org.testng.Assert.assertEquals;
 
 public class WorkoutPage extends CreateAndValidateBaseWorkout {
     public WorkoutPage(WebDriver driver) {
@@ -20,9 +17,8 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
     private static final By TO_UPDATE_WORKOUT = By.cssSelector(".dropdown-toggle");
     private static final By ADD_WORKOUT_BUTTON = By.cssSelector("#saveButton");
     private static final By UPDATE_WORKOUT_BUTTON = By.cssSelector("[name='btnSubmit']");
-    private static final By ALL_WORKOUTS = By.xpath("//td[contains(@class,'fc-widget-content')]//div[@class='fc-event-activity-title']");
 
-
+    @Step("Fill workout({workoutType}) fields")
     public WorkoutPage fillWorkout(String workoutType, BaseWorkout workout) {
         Map<String, String> workoutsDropDown = new HashMap<>();
         workoutsDropDown.put("Run", "run");
@@ -91,7 +87,7 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
         return this;
     }
 
-
+    @Step("Validate workout({workoutType}) fields")
     public WorkoutPage validateWorkout(String workoutType, BaseWorkout workout) {
         toUpdateWorkout();
 
@@ -150,27 +146,27 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
         return this;
     }
 
-
+    @Step("Open update workout page")
     public WorkoutPage toUpdateWorkout() {
         driver.findElement(TO_UPDATE_WORKOUT).click();
         return this;
     }
-
+    @Step("Fill updated workout")
     public WorkoutPage updateWorkoutTo(String type, BaseWorkout workout) {
         fillWorkout(type, workout);
         return this;
     }
-
+    @Step("Click update workout button")
     public WorkoutPage clickUpdateWorkout() {
         driver.findElement(UPDATE_WORKOUT_BUTTON).click();
         return this;
     }
-
+    @Step("Click add workout")
     public WorkoutPage clickAddWorkout() {
         driver.findElement(ADD_WORKOUT_BUTTON).click();
         return this;
     }
-
+    @Step("Quick add workout")
     public WorkoutPage quickAddWorkout(BaseWorkout workout) {
         fillDefaults(workout);
         fillTimeOfDay(workout);

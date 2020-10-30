@@ -1,5 +1,6 @@
 package pages;
 
+import io.qameta.allure.Step;
 import models.Account;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -24,6 +25,7 @@ public class RegisterPage extends BasePage {
     public static final By PASSWORD_COMPLEXITY = By.cssSelector(".pwdText");
     public static final By VALIDATE = By.cssSelector(".user-info");
 
+    @Step("Fill register fields ")
     public RegisterPage fillAccount(Account account) {
 
         Select select = new Select(driver.findElement(SELECT_TIME_ZONE));
@@ -37,29 +39,29 @@ public class RegisterPage extends BasePage {
 
     }
 
+    @Step("Click create account button")
     public RegisterPage clickCreateAccount() {
         driver.findElement(CREATE_NEW_ACCOUNT_BUTTON).click();
         return this;
     }
 
-
+    @Step("Check password complexity")
     public String sendPasswordAndGetComplexity(String passsword) {
         driver.findElement(By.xpath(format(XPATH_FOR_INPUTS, "Password"))).sendKeys(passsword);
-
         return driver.findElement(PASSWORD_COMPLEXITY).getText();
     }
-
+    @Step("Get amount empty inputs")
     public int getAmountEmptyInputs() {
 
         List<WebElement> allAppearedMessages = driver.findElements(By.xpath(GET_ERROR_UNDER_LOCATORS));
         return allAppearedMessages.size();
     }
-
+    @Step("Check error message")
     public void errorMessageShouldBe(String error) {
         assertEquals(driver.findElement(ERROR_MESSAGE).getText(), error);
 
     }
-
+    @Step("Validate registration ")
     public void validateRegistration() {
         driver.findElement(VALIDATE).isDisplayed();
     }
