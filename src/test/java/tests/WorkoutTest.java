@@ -9,8 +9,9 @@ import org.testng.annotations.Test;
 public class WorkoutTest extends BaseTest {
     String date = "11/12/2020";
     BaseWorkout swim = BaseWorkout.builder().subType("Drills").date(date).timeOfDay("05:45 AM").workoutName("SwimWorkout").description("went to the pools").distanceType("m").distance(15).duration("25:00").paceType("kph").feel("Poor").perceivedEffort("3 (Light)").caloriesBurned(1232).build();
+    BaseWorkout swim2 = BaseWorkout.builder().subType("Endurance").date(date).timeOfDay("05:45 AM").workoutName("SwimWorkout").description("test").distanceType("m").distance(15).duration("25:00").paceType("kph").feel("Poor").perceivedEffort("2 (Light)").caloriesBurned(3122).build();
     BaseWorkout bike = BaseWorkout.builder().subType("Intervals").date(date).timeOfDay("05:45 AM").workoutName("BikeWorkout").description("Ride a bike to work").distanceType("m").distance(12).duration("25:00").paceType("kph").elevationGainType("ft").elevationGain(12).elevationLossType("m").elevationLoss(12).feel("Normal").perceivedEffort("5 (Moderate)").avgPower(12).maxPower(14).avgCadence(70).maxCadence(90).minHR(12).avgHR(15).maxHR(17).caloriesBurned(123).build();
-    BaseWorkout run = BaseWorkout.builder().subType("Marathon Pace").date(date).timeOfDay("05:45 AM").workoutName("run").description("run").distanceType("m").distance(12).duration("25:00").paceType("kph").feel("Good").perceivedEffort("5 (Moderate)").minHR(12).avgHR(15).maxHR(17).caloriesBurned(123).build();
+    BaseWorkout run = BaseWorkout.builder().subType("Long Run").date(date).timeOfDay("05:45 AM").workoutName("run").description("run").distanceType("m").distance(12).duration("25:00").paceType("kph").feel("Good").perceivedEffort("5 (Moderate)").minHR(12).avgHR(15).maxHR(17).caloriesBurned(123).build();
     BaseWorkout crossTraining = BaseWorkout.builder().date(date).timeOfDay("05:45 AM").workoutName("cross training").description("cross training").distanceType("m").distance(12).duration("25:00").paceType("kph").feel("Terrible").perceivedEffort("5 (Moderate)").minHR(12).avgHR(15).maxHR(17).caloriesBurned(123).build();
     BaseWorkout walk = BaseWorkout.builder().date(date).timeOfDay("05:45 AM").workoutName("walk").description("walk").distanceType("m").distance(12).duration("25:00").paceType("kph").elevationGainType("ft").elevationGain(12).elevationLossType("m").elevationLoss(12).feel("Normal").perceivedEffort("5 (Moderate)").avgPower(12).maxPower(14).avgCadence(70).maxCadence(90).minHR(12).avgHR(15).maxHR(17).caloriesBurned(123).build();
     BaseWorkout restDay = BaseWorkout.builder().date(date).workoutName("rest day").description("Rest day").build();
@@ -62,9 +63,9 @@ public class WorkoutTest extends BaseTest {
                 .fillWorkout("Swim", swim)
                 .clickAddWorkout()
                 .toUpdateWorkout()
-                .updateWorkoutTo("Run", run)
+                .updateWorkoutTo("Swim", swim2)
                 .clickUpdateWorkout()
-                .validateWorkout("Run", run);
+                .validateWorkout("Swim", swim2);
         calendarSteps
                 .deleteFromTo(date,date);
 
