@@ -125,52 +125,52 @@ public class CreateAndValidateBaseWorkout extends BasePage {
 
     @Step("Validate SubType")
     protected void validateSubType(BaseWorkout workout) {
-        assertEquals(driver.findElement(VALIDATE_SUBTYPE).getText(), workout.getSubType());
+        assertEquals(driver.findElement(VALIDATE_SUBTYPE).getText(), workout.getSubType(),"Fail validate sub type");
     }
 
     @Step("Validate Date")
     protected void validateDate(BaseWorkout workout) {
-        assertEquals(driver.findElement(DATE).getAttribute("value"), workout.getDate());
+        assertEquals(driver.findElement(DATE).getAttribute("value"), workout.getDate(),"Fail validate date");
     }
 
     @Step("Validate TimeOfDay")
     protected void validateTimeOfDay(BaseWorkout workout) {
-        assertEquals(driver.findElement(TIME_OF_DAY).getAttribute("value"), workout.getTimeOfDay());
+        assertEquals(driver.findElement(TIME_OF_DAY).getAttribute("value"), workout.getTimeOfDay(),"Fail validate time of day");
     }
 
     @Step("Validate Workout Name")
     protected void validateWorkoutName(BaseWorkout workout) {
-        assertEquals(driver.findElement(WORKOUT_NAME).getAttribute("value"), workout.getWorkoutName());
+        assertEquals(driver.findElement(WORKOUT_NAME).getAttribute("value"), workout.getWorkoutName(),"Fail validate workout name");
     }
 
     @Step("Validate Description")
     protected void validateWorkoutDescription(BaseWorkout workout) {
-        assertEquals(driver.findElement(DESCRIPTION).getAttribute("value"), workout.getDescription());
+        assertEquals(driver.findElement(DESCRIPTION).getAttribute("value"), workout.getDescription(),"Fail validate Description");
     }
 
     @Step("Validate Distance Type")
     protected void validateDistanceType(BaseWorkout workout) {
-        assertEquals(getSelectedOption("DistType"), workout.getDistanceType());
+        assertEquals(getSelectedOption("DistType"), workout.getDistanceType(),"Fail validate Distance type");
     }
 
     @Step("Validate Distance")
     protected void validateDistance(BaseWorkout workout) {
-        assertEquals(driver.findElement(DISTANCE).getAttribute("value"), String.valueOf(workout.getDistance()));
+        assertEquals(driver.findElement(DISTANCE).getAttribute("value"), String.valueOf(workout.getDistance()),"Fail validate Distance");
     }
 
     @Step("Validate Pace Type")
     protected void validatePaceType(BaseWorkout workout) {
-        assertEquals(getSelectedOption("PaceType"), workout.getPaceType());
+        assertEquals(getSelectedOption("PaceType"), workout.getPaceType(),"Fail validate Pace type");
     }
 
     @Step("Validate Pace")
     protected void validatePace(BaseWorkout workout) {
-        assertEquals(driver.findElement(PACE).getAttribute("value"), workout.getPace());
+        assertEquals(driver.findElement(PACE).getAttribute("value"), workout.getPace(),"Fail validate pace");
     }
 
     @Step("Validate Duration")
     protected void validateDuration(BaseWorkout workout) {
-        assertEquals(driver.findElement(DURATION).getAttribute("value"), workout.getDuration());
+        assertEquals(driver.findElement(DURATION).getAttribute("value"), workout.getDuration(),"Fail validate Duration");
     }
 
     @Step("Validate Feel")
@@ -180,69 +180,69 @@ public class CreateAndValidateBaseWorkout extends BasePage {
 
     @Step("Validate Perceived Effort")
     protected void validatePerceivedEffort(BaseWorkout workout) {
-        assertEquals(getSelectedOption("PerEffort"), workout.getPerceivedEffort());
+        assertEquals(getSelectedOption("PerEffort"), workout.getPerceivedEffort(),"Fail validate PerceiverEffort");
     }
 
     @Step("Validate Min HR")
     protected void validateMinHR(BaseWorkout workout) {
-        assertEquals(driver.findElement(MIN_HR).getAttribute("value"), String.valueOf(workout.getMinHR()));
+        assertEquals(driver.findElement(MIN_HR).getAttribute("value"), String.valueOf(workout.getMinHR()),"Fail validate MinHr");
     }
 
     @Step("Validate Avg HR")
     protected void validateAvgHR(BaseWorkout workout) {
-        assertEquals(driver.findElement(AVG_HR).getAttribute("value"), String.valueOf(workout.getAvgHR()));
+        assertEquals(driver.findElement(AVG_HR).getAttribute("value"), String.valueOf(workout.getAvgHR()),"Fail validate AvgHR");
     }
 
     @Step("Validate Max HR")
     protected void validateMaxHR(BaseWorkout workout) {
-        assertEquals(driver.findElement(MAX_HR).getAttribute("value"), String.valueOf(workout.getMaxHR()));
+        assertEquals(driver.findElement(MAX_HR).getAttribute("value"), String.valueOf(workout.getMaxHR()),"Fail validate Max HR");
     }
 
     @Step("Validate Calories Burned")
     protected void validateCaloriesBurned(BaseWorkout workout) {
-        assertEquals(driver.findElement(CALORIES_BURNED).getAttribute("value"), String.valueOf(workout.getCaloriesBurned()));
+        assertEquals(driver.findElement(CALORIES_BURNED).getAttribute("value"), String.valueOf(workout.getCaloriesBurned()),"Fail validate Calories Burned");
     }
 
     @Step("Validate Avg Power")
     protected void validateAvgPower(BaseWorkout workout) {
-        assertEquals(driver.findElement(AVG_POWER).getAttribute("value"), String.valueOf(workout.getAvgPower()));
+        assertEquals(driver.findElement(AVG_POWER).getAttribute("value"), String.valueOf(workout.getAvgPower()),"Fail validate Avg Power");
     }
 
     @Step("Validate Max Power")
     protected void validateMaxPower(BaseWorkout workout) {
-        assertEquals(driver.findElement(MAX_POWER).getAttribute("value"), String.valueOf(workout.getMaxPower()));
+        assertEquals(driver.findElement(MAX_POWER).getAttribute("value"), String.valueOf(workout.getMaxPower()),"Fail validate Max Power");
     }
 
     @Step("Validate Avg Cadence")
     protected void validateAvgCadence(BaseWorkout workout) {
-        assertEquals(driver.findElement(AVG_CADENCE).getAttribute("value"), String.valueOf(workout.getAvgCadence()));
+        assertEquals(driver.findElement(AVG_CADENCE).getAttribute("value"), String.valueOf(workout.getAvgCadence()),"Fail validate  Avg Cadence");
     }
 
     @Step("Validate Max Cadence")
     protected void validateMaxCadence(BaseWorkout workout) {
-        assertEquals(driver.findElement(MAX_CADENCE).getAttribute("value"), String.valueOf(workout.getMaxCadence()));
+        assertEquals(driver.findElement(MAX_CADENCE).getAttribute("value"), String.valueOf(workout.getMaxCadence()),"Fail validate Max Cadence");
     }
 
     @Step("Validate Elevation Gain Type")
     protected void validateElevationGainType(BaseWorkout workout) {
-        assertEquals(getSelectedOption("EGainDistType"), workout.getElevationGainType());
+        assertEquals(getSelectedOption("EGainDistType"), workout.getElevationGainType(),"Fail validate Elevation Gain Type");
     }
 
     @Step("Validate Elevation Gain")
     protected void validateElevationGain(BaseWorkout workout) {
         String elevationGain = driver.findElement(ELEVATION_GAIN).getAttribute("value");
-        assertEquals(elevationGain.substring(0, elevationGain.indexOf(".")), valueOf(workout.getElevationGain()));
+        assertEquals(elevationGain.substring(0, elevationGain.indexOf(".")), valueOf(workout.getElevationGain()),"Fail validate Elevation Gain");
     }
 
     @Step("Validate Elevation Loss Type")
     protected void validateElevationLossType(BaseWorkout workout) {
-        assertEquals(getSelectedOption("ELossDistType"), workout.getElevationLossType());
+        assertEquals(getSelectedOption("ELossDistType"), workout.getElevationLossType(),"Fail validate Elevation Loss Type ");
     }
 
     @Step("Validate Elevation Loss")
     protected void validateElevationLoss(BaseWorkout workout) {
         String elevationLoss = driver.findElement(ELEVATION_LOSS).getAttribute("value");
-        assertEquals(elevationLoss.substring(0, elevationLoss.indexOf(".")), valueOf(workout.getElevationLoss()));
+        assertEquals(elevationLoss.substring(0, elevationLoss.indexOf(".")), valueOf(workout.getElevationLoss()),"Fail validate Elevation Loss");
     }
 
     @Step("Select SubType: (workout.)")

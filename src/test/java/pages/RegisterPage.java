@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import models.Account;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -12,6 +13,7 @@ import java.util.List;
 import static java.lang.String.format;
 import static org.testng.Assert.assertEquals;
 
+@Log4j2
 public class RegisterPage extends BasePage {
     public RegisterPage(WebDriver driver) {
         super(driver);
@@ -27,6 +29,7 @@ public class RegisterPage extends BasePage {
 
     @Step("Fill register fields ")
     public RegisterPage fillAccount(Account account) {
+        log.info("Fill register fields: \n" + account.toString());
 
         Select select = new Select(driver.findElement(SELECT_TIME_ZONE));
         select.selectByVisibleText(account.getTimeZone());
@@ -41,28 +44,35 @@ public class RegisterPage extends BasePage {
 
     @Step("Click create account button")
     public RegisterPage clickCreateAccount() {
+        log.info("Click create account button");
         driver.findElement(CREATE_NEW_ACCOUNT_BUTTON).click();
         return this;
     }
 
     @Step("Check password complexity")
-    public String sendPasswordAndGetComplexity(String passsword) {
-        driver.findElement(By.xpath(format(XPATH_FOR_INPUTS, "Password"))).sendKeys(passsword);
+    public String sendPasswordAndGetComplexity(String password) {
+        log.info("Send password:(" + password + ") and get complexity");
+        driver.findElement(By.xpath(format(XPATH_FOR_INPUTS, "Password"))).sendKeys(password);
         return driver.findElement(PASSWORD_COMPLEXITY).getText();
     }
-    @Step("Get amount empty inputs")
-    public int getAmountEmptyInputs() {
 
+    @Step("Get amount empty fields")
+    public int getAmountEmptyInputs() {
+        log.info("Get amount empty fields");
         List<WebElement> allAppearedMessages = driver.findElements(By.xpath(GET_ERROR_UNDER_LOCATORS));
         return allAppearedMessages.size();
     }
+
     @Step("Check error message")
     public void errorMessageShouldBe(String error) {
-        assertEquals(driver.findElement(ERROR_MESSAGE).getText(), error);
+        log.info("Check error message:\n"+error);
+        assertEquals(driver.findElement(ERROR_MESSAGE).getText(), error,"Fail check error message");
 
     }
+
     @Step("Validate registration ")
     public void validateRegistration() {
+        log.info("Validate registration");
         driver.findElement(VALIDATE).isDisplayed();
     }
 }

@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import models.DailyVitals;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -13,7 +14,7 @@ import java.util.List;
 import static java.lang.String.format;
 import static java.lang.String.valueOf;
 import static org.testng.Assert.assertEquals;
-
+@Log4j2
 public class DailyVitalsPage extends BasePage {
     public DailyVitalsPage(WebDriver driver) {
         super(driver);
@@ -56,45 +57,52 @@ public class DailyVitalsPage extends BasePage {
 
     @Step("Select sort by: {sort}")
     public DailyVitalsPage sortBy(String sort) {
+        log.info("Select sort by "+sort);
         selectOption(SORT, sort);
         return this;
     }
 
     @Step("Fill input: {input}")
     private void fillStringInput(By input, String str) {
+        log.info("Fill input:"+input.toString()+"\nString: "+str);
         driver.findElement(input).clear();
         driver.findElement(input).sendKeys(str);
     }
 
     @Step("Fill input: {input}")
     private void fillIntInput(By input, int number) {
+        log.info("Fill input:"+input.toString()+"\nString: "+number);
         driver.findElement(input).clear();
         driver.findElement(input).sendKeys(valueOf(number));
     }
 
     @Step("Check amount day after sort, expected: {amount}")
     public void amountDaysAfterSortShouldBe(int amount) {
+        log.info("Check amount days, expected:"+amount);
         List<WebElement> allDays = driver.findElements(ALL_DAYS);
-        assertEquals(allDays.size(), amount);
+        assertEquals(allDays.size(), amount,"Failed check amount day after sort");
     }
 
     @Step("Add vitals ")
     public DailyVitalsPage clickAddVitals() {
+        log.info("Click add vitals");
         driver.findElement(OPEN_ADD_VITALS_BUTTON).click();
         return this;
     }
 
     @Step("Click add vitals button")
     private DailyVitalsPage addVitals() {
+        log.info("Open vitals form");
         driver.findElement(ADD_VITALS_BUTTON).click();
         return this;
     }
 
     @Step("Validate delete by date: {date}")
     public void validateDelete(String date) {
+        log.info("Validate delete by date: "+date);
         List<WebElement> allTableFields = driver.findElements(By.xpath(format(VALIDATE_DELETE, date)));
         for (int i = 1; i < allTableFields.size(); i++) {
-            assertEquals(allTableFields.get(i).getText(), "");
+            assertEquals(allTableFields.get(i).getText(), "","Failed validate delete");
 
         }
 
@@ -102,6 +110,7 @@ public class DailyVitalsPage extends BasePage {
 
     @Step("Confirm Delete")
     public DailyVitalsPage confirmDelete() {
+        log.info("Confirm delete");
         wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(CONFIRM_DELETE)));
         driver.findElement(CONFIRM_DELETE).click();
         return this;
@@ -109,6 +118,7 @@ public class DailyVitalsPage extends BasePage {
 
     @Step("Delete daily vitals by date: {date}")
     public DailyVitalsPage deleteDailyVitalsByDate(String date) {
+        log.info("Delete daily vitals by date:"+date);
         driver.findElement(By.xpath(format(DATE, date))).click();
         driver.findElement(DELETE_BUTTON).click();
         return this;
@@ -116,15 +126,17 @@ public class DailyVitalsPage extends BasePage {
 
     @Step("Validate input: {input}")
     private void validateInput(By input, String expectedText) {
-        assertEquals(driver.findElement(input).getAttribute("value"), expectedText);
+        log.info("");
+        assertEquals(driver.findElement(input).getAttribute("value"), expectedText,"Failed validate input: "+input.toString());
     }
     @Step("Validate select by id: {selectID}")
     private void validateSelect(String selectID, String option) {
-        assertEquals(driver.findElement(By.xpath(format(VALIDATE_SELECT, selectID))).getText(), option);
+        assertEquals(driver.findElement(By.xpath(format(VALIDATE_SELECT, selectID))).getText(), option,"Failed validate option");
     }
     @Step("Create daily vitals")
     public DailyVitalsPage createDailyVitals(DailyVitals dailyVitals) {
-        //fillInputs -
+        log.info("Create daily vitals:\n"+dailyVitals.toString());
+        //fillInputs
         fillStringInput(VITALS_DATE, dailyVitals.getDate());
         fillIntInput(STEPS, dailyVitals.getSteps());
         fillIntInput(CALORIES_BURNED, dailyVitals.getCaloriesConsumed());
@@ -150,12 +162,14 @@ public class DailyVitalsPage extends BasePage {
     }
     @Step("Update daily vitals")
     public DailyVitalsPage updateDailyVitalsByDate(String date, DailyVitals dailyVitals) {
+        log.info("Update daily vitals by date:"+date+"to:\n"+dailyVitals.toString());
         driver.findElement(By.xpath(format(DATE, date))).click();
         createDailyVitals(dailyVitals);
         return this;
     }
     @Step("Validate daily vitals")
     public DailyVitalsPage validateDailyVitals(DailyVitals dailyVitals) {
+        log.info("Validate daily vitals:\n"+dailyVitals.toString());
         driver.findElement(By.xpath(format(DATE, dailyVitals.getDate()))).click();
         //validateInputs
         validateInput(VITALS_DATE, dailyVitals.getDate());

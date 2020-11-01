@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,7 +13,7 @@ import java.util.Map;
 
 import static java.lang.String.format;
 import static org.testng.Assert.assertEquals;
-
+@Log4j2
 public class WorkoutReportPage extends BasePage {
 
     private static final By START_DATE = By.cssSelector("#WorkoutDate");
@@ -28,12 +29,14 @@ public class WorkoutReportPage extends BasePage {
 
     @Step("Click view report button")
     public WorkoutReportPage clickViewReportButton() {
+        log.info("Click view report button");
         driver.findElement(VIEW_REPORT_BUTTON).click();
         return this;
     }
 
     @Step("Fill workout report fields")
     public WorkoutReportPage fillDatesAndActivityType(String startDate, String endDate, String activityType) {
+        log.info("Fill workout report fields");
         driver.findElement(START_DATE).clear();
         driver.findElement(START_DATE).sendKeys(startDate);
         driver.findElement(END_DATE).clear();
@@ -46,11 +49,12 @@ public class WorkoutReportPage extends BasePage {
     @Step("Check amount workout(expected: {expectedAmount})")
     public void amountWorkoutsShouldBe(int expectedAmount) {
         List<WebElement> allWorkouts = driver.findElements(ALL_WORKOUTS);
-        assertEquals(allWorkouts.size(), expectedAmount);
+        assertEquals(allWorkouts.size(), expectedAmount,"Fail check amount workout");
     }
 
     @Step("Select report view: {option}")
     public void selectReportView(String option) {
+        log.info("Select report view by :"+option);
         Map<String, String> reportViewOption = new HashMap<>();
         reportViewOption.put("List View", "1");
         reportViewOption.put("Group by Week ", "2");
