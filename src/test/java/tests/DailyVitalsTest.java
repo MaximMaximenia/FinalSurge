@@ -14,8 +14,8 @@ public class DailyVitalsTest extends BaseTest {
         return new Object[][]{
                 {"This Week", 7},
                 {"Last Week", 7},
-                {"This Month", 31},
-                {"Last Month", 30},
+                {"This Month", 30},
+                {"Last Month", 31},
                 {"Past 7 Days", 7},
                 {"Past 14 Days", 14},
                 {"Past 30 Days", 30},
