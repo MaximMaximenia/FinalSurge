@@ -58,7 +58,7 @@ public class CalendarTest extends BaseTest {
                 .login("masya@mail.ru", "1234321MAks__", false);
         calendarPage
                 .openCalendarPage()
-                .openCalendarMenuByDayAndSelectOptionInDropdown(20, "Quick Add");
+                .openCalendarMenuByDayAndSelectOptionInDropdown(26, "Quick Add");
         workoutPage
                 .quickAddWorkout(swim);
         calendarPage
@@ -74,14 +74,14 @@ public class CalendarTest extends BaseTest {
 
         calendarPage
                 .openCalendarPage()
-                .openCalendarMenuByDayAndSelectOptionInDropdown(20, "Quick Add");
+                .openCalendarMenuByDayAndSelectOptionInDropdown(26, "Quick Add");
         workoutPage
                 .quickAddWorkout(run);
         calendarPage
                 .amountWorkoutsShouldBe(1);
         calendarPage
                 .openCalendarPage()
-                .openCalendarMenuByDayAndSelectOptionInDropdown(21, "Quick Add");
+                .openCalendarMenuByDayAndSelectOptionInDropdown(26, "Quick Add");
         workoutPage.
                 quickAddWorkout(swim);
         calendarPage

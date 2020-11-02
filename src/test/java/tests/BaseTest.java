@@ -40,7 +40,7 @@ public class BaseTest {
 
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(20, TimeUnit.SECONDS);
+        driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
         //PAGES
         workoutReportPage = new WorkoutReportPage(driver);
         calendarPage = new CalendarPage(driver);
