@@ -120,6 +120,7 @@ public class CreateAndValidateBaseWorkout extends BasePage {
 
     @Step("Open Workout Drop Down")
     protected void openDropdown(String workoutName) {
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.cssSelector(format(DROP_DOWN, workoutName)))));
         driver.findElement(By.cssSelector(format(DROP_DOWN, workoutName))).click();
     }
 
