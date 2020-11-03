@@ -126,6 +126,7 @@ public class CreateAndValidateBaseWorkout extends BasePage {
 
     @Step("Validate SubType")
     protected void validateSubType(BaseWorkout workout) {
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(VALIDATE_SUBTYPE)));
         assertEquals(driver.findElement(VALIDATE_SUBTYPE).getText(), workout.getSubType(),"Fail validate sub type");
     }
 

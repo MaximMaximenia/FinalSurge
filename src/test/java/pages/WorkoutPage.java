@@ -9,6 +9,7 @@ import org.openqa.selenium.WebDriver;
 
 import java.util.HashMap;
 import java.util.Map;
+
 @Log4j2
 public class WorkoutPage extends CreateAndValidateBaseWorkout {
     public WorkoutPage(WebDriver driver) {
@@ -21,7 +22,7 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
 
     @Step("Fill workout({workoutType}) fields")
     public WorkoutPage fillWorkout(String workoutType, BaseWorkout workout) {
-        log.info("Select workout:"+workoutType+"\nFill workout fields:\n"+workout.toString());
+        log.info("Select workout:" + workoutType + "\nFill workout fields:\n" + workout.toString());
         Map<String, String> workoutsDropDown = new HashMap<>();
         workoutsDropDown.put("Run", "run");
         workoutsDropDown.put("Bike", "bike");
@@ -92,7 +93,7 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
     @Step("Validate workout({workoutType}) fields")
     public WorkoutPage validateWorkout(String workoutType, BaseWorkout workout) {
         toUpdateWorkout();
-        log.info("Validate workout ("+workoutType+")");
+        log.info("Validate workout (" + workoutType + ")");
         if (!workoutType.equals("Cross Training") & !workoutType.equals("Strength Training")) {
             validateDefaults(workout);
             if (workout.getTimeOfDay() != null) {
@@ -154,24 +155,28 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
         driver.findElement(TO_UPDATE_WORKOUT).click();
         return this;
     }
+
     @Step("Fill updated workout")
     public WorkoutPage updateWorkoutTo(String type, BaseWorkout workout) {
-        log.info("Update workout("+type+") to:\n"+workout.toString());
+        log.info("Update workout(" + type + ") to:\n" + workout.toString());
         fillWorkout(type, workout);
         return this;
     }
+
     @Step("Click update workout button")
     public WorkoutPage clickUpdateWorkout() {
         log.info("Click update workout ");
         driver.findElement(UPDATE_WORKOUT_BUTTON).click();
         return this;
     }
+
     @Step("Click add workout")
     public WorkoutPage clickAddWorkout() {
         log.info("Click add workout");
         driver.findElement(ADD_WORKOUT_BUTTON).click();
         return this;
     }
+
     @Step("Quick add workout")
     public WorkoutPage quickAddWorkout(BaseWorkout workout) {
         log.info("Quick add workout fill field");
