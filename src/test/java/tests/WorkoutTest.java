@@ -5,6 +5,7 @@ import io.qameta.allure.Description;
 import models.workouts.BaseWorkout;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
+import utils.Retry;
 
 public class WorkoutTest extends BaseTest {
     String date = "11/12/2020";
@@ -52,7 +53,7 @@ public class WorkoutTest extends BaseTest {
     }
 
     @Description("Update workout test")
-    @Test
+    @Test(retryAnalyzer = Retry.class)
     public void updateWorkoutTest() {
 
 
