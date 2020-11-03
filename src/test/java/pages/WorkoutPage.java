@@ -34,6 +34,7 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
         workoutsDropDown.put("Recovery/Rehab", "recovery");
         workoutsDropDown.put("Other", "other");
         workoutsDropDown.put("Transition", "trans");
+
         openDropdown(workoutsDropDown.get(workoutType));
 
         if (!workoutType.equals("Cross Training") & !workoutType.equals("Strength Training")) {
