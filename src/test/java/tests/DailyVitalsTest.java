@@ -6,8 +6,8 @@ import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 public class DailyVitalsTest extends BaseTest {
-    DailyVitals dailyVitals = DailyVitals.builder().date("11/7/2020").steps(12).caloriesConsumed(587).weight(78).weightType("kg").bodyFat(22).water(12).muscleMassType("kg").muscleMass(45).restingHr(90).hrVariability(123).sleepHours(12).totalTimeAwake(8).sleepAmount("Enough").sleepQuality("Good").stressAmount("Low").bloodPressureDiastolic(53).bloodPressureSystolic(12).healthNotes("TEST").build();
-    DailyVitals dailyVitals2 = DailyVitals.builder().date("11/6/2020").steps(14).caloriesConsumed(582).weight(60).weightType("lbs").bodyFat(11).water(22).muscleMassType("lbs").muscleMass(45).restingHr(60).hrVariability(121).sleepHours(12).totalTimeAwake(8).sleepAmount("Hardly Any").sleepQuality("Poor").stressAmount("High").bloodPressureDiastolic(35).bloodPressureSystolic(21).healthNotes("TEST2").build();
+    DailyVitals dailyVitals = DailyVitals.builder().date("11/3/2020").steps(12).caloriesConsumed(587).weight(78).weightType("kg").bodyFat(22).water(12).muscleMassType("kg").muscleMass(45).restingHr(90).hrVariability(123).sleepHours(12).totalTimeAwake(8).sleepAmount("Enough").sleepQuality("Good").stressAmount("Low").bloodPressureDiastolic(53).bloodPressureSystolic(12).healthNotes("TEST").build();
+    DailyVitals dailyVitals2 = DailyVitals.builder().date("11/3/2020").steps(14).caloriesConsumed(582).weight(60).weightType("lbs").bodyFat(11).water(22).muscleMassType("lbs").muscleMass(45).restingHr(60).hrVariability(121).sleepHours(12).totalTimeAwake(8).sleepAmount("Hardly Any").sleepQuality("Poor").stressAmount("High").bloodPressureDiastolic(35).bloodPressureSystolic(21).healthNotes("TEST2").build();
 
     @DataProvider(name = "Sort")
     public Object[][] sort() {
