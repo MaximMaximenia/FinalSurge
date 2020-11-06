@@ -31,7 +31,7 @@ public class BaseTest {
     LoginSteps loginSteps;
     RegistrationSteps registrationSteps;
     CalendarSteps calendarSteps;
-    //FRAMES
+    //FRAMES.
     CopyMoveDeleteFrame copyMoveDeleteFrame;
     PrintFrame printFrame;
 
