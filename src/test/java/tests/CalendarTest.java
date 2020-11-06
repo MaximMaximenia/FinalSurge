@@ -17,8 +17,9 @@ public class CalendarTest extends BaseTest {
                 {"January"}, {"February"}, {"March"}, {"April"}, {"May"}, {"June"}, {"July"}, {"August"}, {"September"}, {"October"}, {"November"}, {"December"},
         };
     }
+
     @Description("Full add workout from calendar test")
-    @Test
+    @Test(priority = 1)
     public void fullAddFromCalendarTest() {
         loginSteps
                 .login("masya@mail.ru", "1234321MAks__", false);
@@ -35,8 +36,9 @@ public class CalendarTest extends BaseTest {
         calendarSteps
                 .deleteFromTo("11/10/2020", "11/15/2020");
     }
+
     @Description("Quick add workout from calendar test")
-    @Test
+    @Test(priority = 1)
     public void quickAddFromCalendarTest() {
         loginSteps
                 .login("masya@mail.ru", "1234321MAks__", false);
@@ -51,8 +53,9 @@ public class CalendarTest extends BaseTest {
                 .deleteFromTo("10/26/2020", "10/26/2020");
 
     }
+
     @Description("Delete one workout")
-    @Test
+    @Test(priority = 1)
     public void deleteOneWorkout() {
         loginSteps
                 .login("masya@mail.ru", "1234321MAks__", false);
@@ -63,11 +66,15 @@ public class CalendarTest extends BaseTest {
                 .quickAddWorkout(swim);
         calendarPage
                 .amountWorkoutsShouldBe(1);
-        calendarSteps.deleteFromTo("10/26/2020", "10/26/2020");
+        calendarSteps
+                .deleteFromTo("10/26/2020", "10/26/2020");
+        calendarPage
+                .amountWorkoutsShouldBe(0);
 
     }
+
     @Description("Delete from date to date ")
-    @Test
+    @Test(priority = 1)
     public void deleteFromToTest() {
         loginSteps
                 .login("masya@mail.ru", "1234321MAks__", false);

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="SmokeTest" parallel="tests" thread-count="2" data-provider-thread-count="1">
-    <test name="Daily Vitals Test">
-        <classes>
-            <class name="tests.DailyVitalsTest"/>
-        </classes>
-    </test>
-    <test name="Calendar Test">
-        <classes>
-            <class name="tests.CalendarTest"/>
-        </classes>
-    </test>
+
     <test name="Login Test">
         <classes>
             <class name="tests.LoginTest"/>
         </classes>
     </test>
+
     <test name="Register Test">
         <classes>
             <class name="tests.RegisterTest"/>
         </classes>
     </test>
+
     <test name="Workout Test">
         <classes>
             <class name="tests.WorkoutTest"/>
         </classes>
     </test>
+
+    <test name="Calendar Test">
+        <classes>
+            <class name="tests.CalendarTest"/>
+        </classes>
+    </test>
+
 </suite>
