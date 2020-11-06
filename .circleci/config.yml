@@ -32,7 +32,7 @@ jobs:
           command: chmod 777 src/test/resources/webdrivers/linux/chromedriver
       - run:
           name: Running tests
-          command: mvn clean install
+          command: mvn clean -D
       - run:
           name: Generate allure report
           command: mvn allure:report
