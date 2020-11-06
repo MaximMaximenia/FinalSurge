@@ -2,6 +2,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="SmokeTest" parallel="tests" thread-count="2" data-provider-thread-count="1">
 
+    <test name="Calendar Test">
+        <classes>
+            <class name="tests.CalendarTest"/>
+        </classes>
+    </test>
+
     <test name="Login Test">
         <classes>
             <class name="tests.LoginTest"/>
@@ -20,10 +26,5 @@
         </classes>
     </test>
 
-    <test name="Calendar Test">
-        <classes>
-            <class name="tests.CalendarTest"/>
-        </classes>
-    </test>
 
 </suite>
