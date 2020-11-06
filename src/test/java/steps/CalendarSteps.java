@@ -22,8 +22,8 @@ public class CalendarSteps extends BaseSteps {
         copyMoveDeleteFrame.
                 switchToFrame()
                 .selectFunction("Delete")
-                .selectStartingDate("9/1/2020")
-                .selectEndingDate("12/31/2020")
+                .selectStartingDate(from)
+                .selectEndingDate(to)
                 .clickContinue()
                 .completeDeleteClick()
                 .switchToDefault();
