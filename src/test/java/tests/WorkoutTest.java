@@ -37,7 +37,7 @@ public class WorkoutTest extends BaseTest {
         };
     }
     @Description("Add workout and validate")
-    @Test(dataProvider = "Workouts")
+    @Test(dataProvider = "Workouts",priority = 1)
     public void addWorkoutAndValidateTest(String type, BaseWorkout workout) {
         loginSteps
                 .login("masya@mail.ru", "1234321MAks__", false)
@@ -53,7 +53,7 @@ public class WorkoutTest extends BaseTest {
     }
 
     @Description("Update workout test")
-    @Test(retryAnalyzer = Retry.class)
+    @Test(retryAnalyzer = Retry.class,priority = 1)
     public void updateWorkoutTest() {
 
 
