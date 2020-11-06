@@ -70,16 +70,7 @@ public class WorkoutTest extends BaseTest {
                 .deleteFromTo(date,date);
 
     }
-    @Description("Clear all workout")
-    @Test(retryAnalyzer = Retry.class,priority = -1)
-    public void clearAllWorkouts() {
-        loginSteps
-                .login("masya@mail.ru", "1234321MAks__", false)
-                .toWorkoutPage();
-        calendarSteps
-                .deleteFromTo(date,date);
 
-    }
 }
 
 
