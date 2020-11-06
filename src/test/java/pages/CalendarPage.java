@@ -22,7 +22,7 @@ public class CalendarPage extends BasePage {
     public static final String SELECT_OPTION_INTO_DROPDOWN = "//td[@data-day='%s']//a[contains(text(),'%s')]";
     public static final String SORT = "//div[@class='fc-header-left']//span[contains(@class,'%s')]"; //weeks,week,month
     public static final String WEEK_SORT = "//ul[@class='dropdown-menu']//a[contains(text(),'%s')]";
-    private static final By ALL_WORKOUTS = By.xpath("//td[contains(@class,'fc-widget-content')]//div[@class='fc-event-activity-title']");
+    private static final String ALL_WORKOUTS = "//td[@data-day='%s']//div[@class='fc-event-activity-title']";
     private static final By MONTH_AND_YEAR = By.cssSelector("#dpMonth");
     private static final By NEXT_MONTH_BUTTON = By.cssSelector(".icon-chevron-right");
 
@@ -70,10 +70,9 @@ public class CalendarPage extends BasePage {
     }
 
     @Step("Check amount created workouts. Expected: {expectedNumberOfWorkouts}")
-    public void amountWorkoutsShouldBe(int expectedNumberOfWorkouts) {
-        log.info("Check that amount workout = "+expectedNumberOfWorkouts);
-        openCalendarPage();
-        List<WebElement> allWorkout = driver.findElements(ALL_WORKOUTS);
+    public void amountWorkoutsInDayShouldBe(int day,int expectedNumberOfWorkouts) {
+        log.info("Check that amount workout in day:"+day+"\nexpected: "+expectedNumberOfWorkouts);
+        List<WebElement> allWorkout = driver.findElements(By.xpath(format(ALL_WORKOUTS,day)));
         assertEquals(allWorkout.size(), expectedNumberOfWorkouts);
 
     }

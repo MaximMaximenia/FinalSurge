@@ -46,7 +46,7 @@ public class WorkoutTest extends BaseTest {
                 .clickAddWorkout()
                 .validateWorkout(type, workout);
         calendarSteps
-                .amountWorkoutsShouldBe(1)
+                .amountWorkoutsShouldBe(12,1)
                 .deleteFromTo(date,date);
 
     }

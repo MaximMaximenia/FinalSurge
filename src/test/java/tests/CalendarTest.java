@@ -30,10 +30,8 @@ public class CalendarTest extends BaseTest {
                 .fillWorkout("Walk", walk)
                 .clickAddWorkout()
                 .validateWorkout("Walk", walk);
-        calendarPage
-                .amountWorkoutsShouldBe(1);
-
         calendarSteps
+                .amountWorkoutsShouldBe(20,1)
                 .deleteFromTo(date, date);
     }
 
@@ -47,9 +45,8 @@ public class CalendarTest extends BaseTest {
                 .openCalendarMenuByDayAndSelectOptionInDropdown(20, "Quick Add");
         workoutPage.
                 quickAddWorkout(swim);
-        calendarPage
-                .amountWorkoutsShouldBe(1);
         calendarSteps
+                .amountWorkoutsShouldBe(20, 1)
                 .deleteFromTo(date, date);
 
     }
@@ -64,12 +61,10 @@ public class CalendarTest extends BaseTest {
                 .openCalendarMenuByDayAndSelectOptionInDropdown(20, "Quick Add");
         workoutPage
                 .quickAddWorkout(swim);
-        calendarPage
-                .amountWorkoutsShouldBe(1);
         calendarSteps
-                .deleteFromTo(date, date);
-        calendarPage
-                .amountWorkoutsShouldBe(0);
+                .amountWorkoutsShouldBe(20, 1)
+                .deleteFromTo(date, date)
+                .amountWorkoutsShouldBe(20, 0);
 
     }
 
@@ -84,19 +79,18 @@ public class CalendarTest extends BaseTest {
                 .openCalendarMenuByDayAndSelectOptionInDropdown(20, "Quick Add");
         workoutPage
                 .quickAddWorkout(run);
-        calendarPage
-                .amountWorkoutsShouldBe(1);
+        calendarSteps
+                .amountWorkoutsShouldBe(20, 1);
         calendarPage
                 .openCalendarPage()
                 .openCalendarMenuByDayAndSelectOptionInDropdown(20, "Quick Add");
         workoutPage.
                 quickAddWorkout(swim);
-        calendarPage
-                .amountWorkoutsShouldBe(2);
         calendarSteps
-                .deleteFromTo(date, date);
-        calendarPage
-                .amountWorkoutsShouldBe(0);
+                .amountWorkoutsShouldBe(20, 2);
+        calendarSteps
+                .deleteFromTo(date, date)
+                .amountWorkoutsShouldBe(20, 0);
     }
 
     @Description("Check month")
