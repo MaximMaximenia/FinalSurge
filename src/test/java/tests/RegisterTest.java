@@ -9,7 +9,7 @@ import java.util.Random;
 
 public class RegisterTest extends BaseTest {
     Random r = new Random();
-    Account defaultUser = Account.builder().firsName("Agent").lastName("AsdaAs").email(r.nextInt(1000) + "ls@mailinator.com").timeZone("(GMT-07:00) Chihuahua, La Paz, Mazatlan").password("121212112MAs_").reTypePassword("121212112MAs_").build();
+    Account defaultUser = Account.builder().firsName("Agent").lastName("AsdaAs").email(r.nextInt(100000) + "als@mailinator.com").timeZone("(GMT-07:00) Chihuahua, La Paz, Mazatlan").password("121212112MAs_").reTypePassword("121212112MAs_").build();
     Account emptyUser = Account.builder().firsName("").lastName("").email("").timeZone("").password("").reTypePassword("").build();
     Account registered = Account.builder().firsName("Agent").lastName("AsdaAs").email("132sss@mailinator.com").timeZone("(GMT-07:00) Chihuahua, La Paz, Mazatlan").password("121212112MAs_").reTypePassword("121212112MAs_").build();
     Account notCorrectPassword = Account.builder().firsName("Agent").lastName("AsdaAs").email(r.nextInt(1000) + "ls@mailinator.com").timeZone("(GMT-07:00) Chihuahua, La Paz, Mazatlan").password("121").reTypePassword("121").build();
