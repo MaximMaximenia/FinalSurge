@@ -49,6 +49,7 @@ public class CalendarPage extends BasePage {
         WebElement calendarPlus = driver.findElement(By.xpath(format(CALENDAR_PLUS, day)));
         actions.moveToElement(calendarPlus).perform();
         calendarPlus.click();
+        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(format(SELECT_OPTION_INTO_DROPDOWN, day, option)))));
         driver.findElement(By.xpath(format(SELECT_OPTION_INTO_DROPDOWN, day, option))).click();
     }
 
@@ -60,7 +61,7 @@ public class CalendarPage extends BasePage {
 
     @Step("Select sort by: {sortType}")
     public void selectSortBy(String sortType) {
-        log.info("Select sort by: "+sortType);
+        log.info("Select sort by: " + sortType);
         if (sortType.contains("weeks")) {
             selectSortWeeksAmount(sortType);
         }
@@ -70,9 +71,9 @@ public class CalendarPage extends BasePage {
     }
 
     @Step("Check amount created workouts. Expected: {expectedNumberOfWorkouts}")
-    public void amountWorkoutsInDayShouldBe(int day,int expectedNumberOfWorkouts) {
-        log.info("Check that amount workout in day:"+day+"\nexpected: "+expectedNumberOfWorkouts);
-        List<WebElement> allWorkout = driver.findElements(By.xpath(format(ALL_WORKOUTS,day)));
+    public void amountWorkoutsInDayShouldBe(int day, int expectedNumberOfWorkouts) {
+        log.info("Check that amount workout in day:" + day + "\nexpected: " + expectedNumberOfWorkouts);
+        List<WebElement> allWorkout = driver.findElements(By.xpath(format(ALL_WORKOUTS, day)));
         assertEquals(allWorkout.size(), expectedNumberOfWorkouts);
 
     }
