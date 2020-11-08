@@ -26,5 +26,36 @@
         </classes>
     </test>
 
+    <test name="Daily Vitals Test">
+        <classes>
+            <class name="tests.DailyVitalsTest"/>
+        </classes>
+    </test>
+
+    <test name="Device Upload Test">
+        <classes>
+            <class name="tests.DeviceUploadTest"/>
+        </classes>
+    </test>
+
+    <test name="Print Workout Test">
+        <classes>
+            <class name="tests.DeviceUploadTest"/>
+        </classes>
+    </test>
+
+    <test name="Workout Report Test">
+        <classes>
+            <class name="tests.WorkoutReportTest"/>
+        </classes>
+    </test>
+
+
+    <test name="Gear And Route Test">
+        <classes>
+            <class name="tests.GearAndRoutesTest"/>
+        </classes>
+    </test>
+
 
 </suite>
