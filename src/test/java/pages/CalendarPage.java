@@ -48,10 +48,7 @@ public class CalendarPage extends BasePage {
         Actions actions = new Actions(driver);
         WebElement calendarPlus = driver.findElement(By.xpath(format(CALENDAR_PLUS, day)));
         actions.moveToElement(calendarPlus).perform();
-        actions.moveToElement(calendarPlus).perform();
         calendarPlus.click();
-        calendarPlus.click();
-        wait.until(ExpectedConditions.elementToBeClickable(driver.findElement(By.xpath(format(SELECT_OPTION_INTO_DROPDOWN, day, option)))));
         driver.findElement(By.xpath(format(SELECT_OPTION_INTO_DROPDOWN, day, option))).click();
     }
 
