@@ -73,7 +73,6 @@ public class CalendarTest extends BaseTest {
     public void deleteFromToTest() {
         loginSteps
                 .login("masya@mail.ru", "1234321MAks__", false);
-
         calendarPage
                 .openCalendarPage()
                 .openCalendarMenuByDayAndSelectOptionInDropdown(20, "Quick Add");

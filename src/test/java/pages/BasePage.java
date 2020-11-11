@@ -27,7 +27,7 @@ public class BasePage {
 
     public BasePage(WebDriver driver) {
         this.driver = driver;
-        wait = new WebDriverWait(driver, 30);
+        wait = new WebDriverWait(driver, 35);
     }
 
     @Step("Open workout report page")
