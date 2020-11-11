@@ -19,19 +19,19 @@ import java.util.concurrent.TimeUnit;
 @Listeners(TestListener.class)
 public class BaseTest {
     WebDriver driver;
-    //PAGES.
+    //PAGES
     CalendarPage calendarPage;
     WorkoutPage workoutPage;
     DailyVitalsPage dailyVitalsPage;
     DeviceUploadPage deviceUploadPage;
     WorkoutReportPage workoutReportPage;
     RegisterPage registerPage;
-    //STEPS.
+    //STEPS
     GearAndRoutesSteps gearAndRoutesSteps;
     LoginSteps loginSteps;
     RegistrationSteps registrationSteps;
     CalendarSteps calendarSteps;
-    //FRAMES.
+    //FRAMES
     CopyMoveDeleteFrame copyMoveDeleteFrame;
     PrintFrame printFrame;
 
