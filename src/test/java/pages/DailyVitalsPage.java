@@ -43,7 +43,6 @@ public class DailyVitalsPage extends BasePage {
     private static final By BLOOD_PRESSURE_DIASTOLIC = By.cssSelector("[name='Diastolic']");
     private static final By OPEN_ADD_VITALS_BUTTON = By.cssSelector("[title='Add Vitals']");
     private static final By ADD_VITALS_BUTTON = By.cssSelector("#saveButton");
-    private static final By SWITCH_TO_MODAL = By.cssSelector(".bootbox.modal");
     private static final By ALL_DAYS = By.xpath("//a[contains(@href,'DailyVitals?vitalsdate')]");
     private static final By CONFIRM_DELETE = By.xpath("//a[contains(text(),'OK')]");
     private static final String DATE = "//a[text()='%s']";
