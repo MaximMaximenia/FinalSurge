@@ -18,7 +18,7 @@ public class CalendarSteps extends BaseSteps {
     public CalendarSteps deleteFromTo(String from, String to) {
         calendarPage
                 .openCalendarPage()
-                .openCalendarMenuByDayAndSelectOptionInDropdown(1, "Copy/Move/Delete");
+                .openCalendarMenuByDayAndSelectOptionInDropdown(11, "Copy/Move/Delete");
         copyMoveDeleteFrame.
                 switchToFrame()
                 .selectFunction("Delete")
