@@ -48,7 +48,9 @@ public class CalendarPage extends BasePage {
         Actions actions = new Actions(driver);
         WebElement calendarPlus = driver.findElement(By.xpath(format(CALENDAR_PLUS, day)));
         actions.moveToElement(calendarPlus).perform();
+        calendarPlus.click();
         driver.findElement(By.xpath(format(SELECT_OPTION_INTO_DROPDOWN, day, option))).click();
+        //
     }
 
     public void selectSortWeeksAmount(String weeksSort) {
