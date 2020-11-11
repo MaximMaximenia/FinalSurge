@@ -19,14 +19,14 @@ import java.util.concurrent.TimeUnit;
 @Listeners(TestListener.class)
 public class BaseTest {
     WebDriver driver;
-    //PAGES
+    //PAGES.
     CalendarPage calendarPage;
     WorkoutPage workoutPage;
     DailyVitalsPage dailyVitalsPage;
     DeviceUploadPage deviceUploadPage;
     WorkoutReportPage workoutReportPage;
     RegisterPage registerPage;
-    //STEPS
+    //STEPS.
     GearAndRoutesSteps gearAndRoutesSteps;
     LoginSteps loginSteps;
     RegistrationSteps registrationSteps;
@@ -41,19 +41,19 @@ public class BaseTest {
         driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
-        //PAGES
+        //PAGES.
         workoutReportPage = new WorkoutReportPage(driver);
         calendarPage = new CalendarPage(driver);
         workoutPage = new WorkoutPage(driver);
         dailyVitalsPage = new DailyVitalsPage(driver);
         deviceUploadPage = new DeviceUploadPage(driver);
         registerPage = new RegisterPage(driver);
-        //STEPS
+        //STEPS.
         gearAndRoutesSteps = new GearAndRoutesSteps(driver);
         calendarSteps = new CalendarSteps(driver);
         loginSteps = new LoginSteps(driver);
         registrationSteps = new RegistrationSteps(driver);
-        //FRAMES
+        //FRAMES.
         copyMoveDeleteFrame = new CopyMoveDeleteFrame(driver);
         printFrame = new PrintFrame(driver);
         context.setAttribute("driver", driver);
