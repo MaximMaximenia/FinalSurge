@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="SmokeTest" parallel="tests" thread-count="3" data-provider-thread-count="1">
+<suite name="SmokeTest" parallel="tests" thread-count="2" data-provider-thread-count="1">
 
     <test name="Calendar Test">
         <classes>
