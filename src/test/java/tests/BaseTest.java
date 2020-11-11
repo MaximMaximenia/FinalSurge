@@ -19,7 +19,7 @@ import java.util.concurrent.TimeUnit;
 @Listeners(TestListener.class)
 public class BaseTest {
     WebDriver driver;
-    //PAGES
+    //PAGES.
     CalendarPage calendarPage;
     WorkoutPage workoutPage;
     DailyVitalsPage dailyVitalsPage;
