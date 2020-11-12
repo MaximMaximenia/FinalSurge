@@ -59,7 +59,7 @@ public class CalendarPage extends BasePage {
 
         driver.findElement(By.xpath(format(SELECT_OPTION_INTO_DROPDOWN, day, option))).click();
     }
-
+//
     public void selectSortWeeksAmount(String weeksSort) {
 
         driver.findElement(By.xpath(format(SORT, "weeks"))).click();
