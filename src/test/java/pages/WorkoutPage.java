@@ -92,7 +92,7 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
     }
 
     @Step("Validate workout({workoutType}) fields")
-    public WorkoutPage validateWorkout(String workoutType, BaseWorkout workout) {
+    public void validateWorkout(String workoutType, BaseWorkout workout) {
         toUpdateWorkout();
         log.info("Validate workout (" + workoutType + ")");
         if (!workoutType.equals("Cross Training") & !workoutType.equals("Strength Training")) {
@@ -147,7 +147,6 @@ public class WorkoutPage extends CreateAndValidateBaseWorkout {
         } else {
             validateCrossTraining(workout);
         }
-        return this;
     }
 
     @Step("Open update workout page")
