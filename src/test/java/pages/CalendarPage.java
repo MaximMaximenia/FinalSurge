@@ -50,11 +50,6 @@ public class CalendarPage extends BasePage {
         WebElement calendarSquare = driver.findElement(By.xpath(format(CALENDAR_SQUARE, day)));
         actions.moveToElement(calendarSquare).perform();
         actions.moveToElement(calendarPlus).perform();
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
         calendarPlus.click();
 
         driver.findElement(By.xpath(format(SELECT_OPTION_INTO_DROPDOWN, day, option))).click();
