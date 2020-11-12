@@ -17,7 +17,6 @@ public class CalendarTest extends BaseTest {
                 {"January"}, {"February"}, {"March"}, {"April"}, {"May"}, {"June"}, {"July"}, {"August"}, {"September"}, {"October"}, {"November"}, {"December"},
         };
     }
-    //
     @Description("Full add workout from calendar test")
     @Test
     public void fullAddFromCalendarTest() {
