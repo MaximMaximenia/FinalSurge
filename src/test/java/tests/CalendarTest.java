@@ -20,6 +20,7 @@ public class CalendarTest extends BaseTest {
     @Description("Full add workout from calendar test")
     @Test
     public void fullAddFromCalendarTest() {
+
         loginSteps
                 .login("masya@mail.ru", "1234321MAks__", false);
         calendarPage
