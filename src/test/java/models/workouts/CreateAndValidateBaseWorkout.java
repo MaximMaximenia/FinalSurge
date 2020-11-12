@@ -169,7 +169,7 @@ public class CreateAndValidateBaseWorkout extends BasePage {
     protected void validatePace(BaseWorkout workout) {
         assertEquals(driver.findElement(PACE).getAttribute("value"), workout.getPace(),"Fail validate pace");
     }
-//
+
     @Step("Validate Duration")
     protected void validateDuration(BaseWorkout workout) {
         assertEquals(driver.findElement(DURATION).getAttribute("value"), workout.getDuration(),"Fail validate Duration");
