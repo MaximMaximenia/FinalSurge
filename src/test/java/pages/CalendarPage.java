@@ -51,7 +51,7 @@ public class CalendarPage extends BasePage {
         actions.moveToElement(calendarSquare).perform();
         actions.moveToElement(calendarPlus).perform();
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
